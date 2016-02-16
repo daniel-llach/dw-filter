@@ -251,25 +251,31 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
 
     .search
     {
+      padding: 0 19px 5px 10px;
 
+      input
+      {
+        width: 100%;
+      }
     }
     .dw-options
     {
-      padding: 0px 10px 5px 10px;
+      padding: 0 19px 10px 10px;
 
       .dw-option
       {
+
+        label
+        {
+          position: relative;
+          font-size: 12px;
+          color: #B4B1B1;
+          bottom: -1px;
+
+          .noselect;
+        }
       }
 
-      label
-      {
-        position: relative;
-        font-size: 12px;
-        color: #B4B1B1;
-        bottom: -1px;
-
-        .noselect;
-      }
       //
       // input[type=checkbox] {
       //   background-color: #f6f3f3;
@@ -278,4 +284,9 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
       // }
     }
   }
+}
+
+.hide
+{
+  display: none;
 }

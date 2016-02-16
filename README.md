@@ -14,6 +14,7 @@ The API accepts the next configurations:
 ### title
 ### type
 ### search
+false, inner, outer
 ### config
 ### data
 

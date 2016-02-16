@@ -26,7 +26,8 @@
           case 'checkbox':
             $.each($options.find('.dw-option') , function(i, opt){
               var $opt = $(opt);
-              if( $opt.is(':checked') ){
+              var $optInput = $opt.find('input');
+              if( $optInput.is(':checked') ){
                 // arm
                 result.push($opt.data('value'));
               }
@@ -46,9 +47,11 @@
         methods.setTemplate($el, options);
         // inject options according to filter type
         methods.setOptionTemplate($el, options);
+        // show search input
+        methods.showSearch($el, options);
       },
       setTemplate : function($el, options){
-        $el.html('<header><div class="left">' + options.title + '</div><div class="right"><i class="toggle-icon">-</i></div></header><content><div class="search"></div><div class="dw-options"></div></content>');
+        $el.html('<header><div class="left">' + options.title + '</div><div class="right"><i class="toggle-icon">-</i></div></header><content><div class="search"><input type="text" name="search" id="dw-search" class="hide"></div><div class="dw-options"></div></content>');
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
@@ -64,8 +67,14 @@
           type: options.type
         });
         $.each(options.data, function(i, data){
-          $el.find('.dw-options').append('<input type="checkbox" name="' + data[value] + '" data-value="' + data[key] + '" id="' + data[value] + '" class="dw-option"><label for="' + data[value] + '">' + data[value] + '</label> <br>');
+          $el.find('.dw-options').append('<div class="dw-option" data-value="' + data[key] + '" data-content="' + data[value] + '"><input type="checkbox" name="' + data[value] + '" id="' + data[value] + '"><label for="' + data[value] + '">' + data[value] + '</label></div>');
         });
+      },
+      showSearch: function($el, options){
+        var $search = $el.find('.search input');
+        if( options.search == 'inner' ){
+          $search.toggleClass('hide');
+        }
       }
     }
 
@@ -73,6 +82,7 @@
     var events = {
       start: function($el, options){
         events.toggleContent($el, options);
+        events.onSearch($el, options);
       },
       toggleContent: function($el, options){
         var $header = $el.find('header');
@@ -89,7 +99,31 @@
             });
           }
         });
+      },
+      onSearch: function($el, options){
+        var $search = $el.find('.search input');
+        $search.on({
+          keyup: function(event){
+            var inputData = $search.val();
+            events.hideOptions($el, inputData, options);
+          }
+        });
+      },
+      hideOptions: function($el, data, options){
+        $.each($el.find('.dw-option') , function(i, opt){
+          var $opt = $(opt);
+          var temp = $opt.data('content');
+          temp = temp.toLowerCase();
+          data = data.toLowerCase();
+          console.log(data, temp);
+          if( temp.indexOf(data) != -1 ) {
+            $opt.show();
+          }else{
+            $opt.hide();
+          }
+        });
       }
+
     }
 
 
