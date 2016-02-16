@@ -17,6 +17,11 @@ The API accepts the next configurations:
 ### config
 ### data
 
+## Val
+
+## Destroy
+
+
 
 ### Example:
 ```javascript
