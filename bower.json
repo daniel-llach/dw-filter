@@ -1,0 +1,26 @@
+{
+  "name": "dw-filter",
+  "authors": [
+    "daniel-llach <daniel.llach@gmail.com>"
+  ],
+  "description": "A filter component for darwinEd",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "filter",
+    "dw",
+    "darwined"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0"
+  }
+}

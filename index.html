@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>dw-filter</title>
+
+    <!-- context style -->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <!-- filter dependencies -->
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./component/dw-filter.js"></script>
+    <link rel="stylesheet" type="text/css" href="./component/dw-filter.css">
+
+</head>
+<body>
+  <div id="contetendorSample" class="contenedorFiltros">
+    <div id="sample1" class="demoDiv"></div>
+  </div>
+
+  <script type="text/javascript">
+    $('#sample1').dwFilter({
+      title: 'Origen',
+      type: 'checkbox',
+      search: true,
+      config: {
+        key_attr: 'id',
+        value_attr: 'content'
+      },
+      data: [
+        {
+          id: 4522,
+          content: 'Real'
+        },
+        {
+          id: 5645,
+          content: 'Proyección 1'
+        },
+        {
+          id: 2378,
+          content: 'Proyección 2'
+        }
+      ]
+    });
+  </script>
+</body>
+</html>

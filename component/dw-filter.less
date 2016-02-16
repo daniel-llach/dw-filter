@@ -1,0 +1,233 @@
+// color
+@azulOscuro: #286186;
+@azul2: #3d5e73;
+@blanco: #ffffff;
+@lineaImpar: #eef8f8;
+@lineaPar: #e4efef;
+
+// tipografia
+@font-face {
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: normal;
+/*src: url('../fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Open Sans';
+font-weight: 300;
+/*src: url('../fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Open Sans';
+font-weight: 700;
+/*src: url('../fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+
+
+
+
+
+// redondeado
+.redondo (@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// degradación
+
+.degradacion (@direction:top, @color1:#fff, @color2:#000)
+{
+	background-color: @color1;
+	background-image: -moz-linear-gradient(@direction, @color1, @color2);
+	background-image: -ms-linear-gradient(@direction, @color1, @color2);
+	background-image: -o-linear-gradient(@direction, @color1, @color2);
+	background-image: -webkit-gradient(linear, center @direction, center bottom, from(@color1), to(@color2));
+	background-image: -webkit-linear-gradient(@direction, @color1, @color2);
+	background-image: linear-gradient(@direction, @color1, @color2);
+	/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+
+}
+
+
+
+
+// eliminar estilos por defecto input, etc
+.no-estilo
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+// seteo animacion
+.animacion (@temp: 1s)
+{
+	-webkit-transition: all @temp ease-in-out;
+	-moz-transition: all @temp ease-in-out;
+	-o-transition: all @temp ease-in-out;
+	transition: all @temp ease-in-out;
+}
+
+.sombra(@sb)
+{
+	-moz-box-shadow: @sb;
+	-webkit-box-shadow: @sb;
+	box-shadow: @sb;
+}
+
+.brillo(@br: .2)
+{
+	filter: brightness(@br);
+	// Browser Specific
+	-webkit-filter: brightness(@br);
+	-moz-filter: brightness(@br);
+	-o-filter: brightness(@br);
+	-ms-filter: brightness(@br);
+}
+
+.blur(@bl: 5px)
+{
+	filter: blur(@bl);
+	// Browser Specific
+	-webkit-filter: blur(@bl);
+	-moz-filter: blur(@bl);
+	-o-filter: blur(@bl);
+	-ms-filter: blur(@bl);
+}
+
+.saturacion(@st: 50%)
+{
+	filter: saturate(@st);
+	// Browser Specific
+	-webkit-filter: saturate(@st);
+	-moz-filter: saturate(@st);
+	-o-filter: saturate(@st);
+	-ms-filter: saturate(@st);
+}
+
+.hue(@hu: 20deg)
+{
+	filter: hue-rotate(@hu);
+	// Browser Specific
+	-webkit-filter: hue-rotate(@hu);
+	-moz-filter: hue-rotate(@hu);
+	-o-filter: hue-rotate(@hu);
+	-ms-filter: hue-rotate(@hu);
+}
+
+.contraste(@cn: 150%)
+{
+	filter: contrast(@cn);
+	// Browser Specific
+	-webkit-filter: contrast(@cn);
+	-moz-filter: contrast(@cn);
+	-o-filter: contrast(@cn);
+	-ms-filter: contrast(@cn);
+}
+
+.invertir(@in: 100%)
+{
+	filter: invert(@in);
+	// Browser Specific
+	-webkit-filter: invert(@in);
+	-moz-filter: invert(@in);
+	-o-filter: invert(@in);
+	-ms-filter: invert(@in);
+}
+
+.grayscale(@gr: 100%)
+{
+	filter: grayscale(@gr);
+	// Browser Specific
+	-webkit-filter: grayscale(@gr);
+	-moz-filter: grayscale(@gr);
+	-o-filter: grayscale(@gr);
+	-ms-filter: grayscale(@gr);
+}
+
+.sepia(@sp: 100%)
+{
+	filter: sepia(@sp);
+	// Browser Specific
+	-webkit-filter: sepia(@sp);
+	-moz-filter: sepia(@sp);
+	-o-filter: sepia(@sp);
+	-ms-filter: sepia(@sp);
+}
+
+
+.izq
+{
+	position: relative;
+	float: left;
+}
+
+.cen
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.der
+{
+	float: right;
+}
+
+
+
+
+//////////////////////////////////////////////////////////
+//////////////////////  INICIO CSS ///////////////////////
+//////////////////////////////////////////////////////////
+
+
+.dw-filter
+{
+  width: 100%;
+  height: auto;
+  font-family: 'Open sans';
+
+  header
+  {
+
+    .left{
+
+    }
+
+    .right
+    {
+
+    }
+
+  }
+
+  content
+  {
+      .search
+      {
+
+      }
+      .dw-options
+      {
+
+        .dw-option
+        {
+          
+        }
+      }
+  }
+}

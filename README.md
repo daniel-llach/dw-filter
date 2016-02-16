@@ -1,2 +1,2 @@
 # dw-filter
-An filter components for darwined
+A filter component for darwinEd.
