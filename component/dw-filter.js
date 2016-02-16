@@ -1,13 +1,15 @@
 // dwFilter
 (function( $ ){
 
-    // Public
+    // Public methods
     var api = {
       init : function(options) {
         console.log("dwFilter init... ");
         var $el = $(this);
         // deploy component structure
         methods.deployComponent($el, options);
+        // init events
+        events.start($el, options);
       },
       destroy: function(){
         var $el = $(this);
@@ -35,7 +37,7 @@
       }
     };
 
-    // Private
+    // Private methods
     var methods = {
       deployComponent: function($el, options){
         // convert the div into a dw-filter component
@@ -46,7 +48,7 @@
         methods.setOptionTemplate($el, options);
       },
       setTemplate : function($el, options){
-        $el.html('<header><div class="right">' + options.title + '</div><div class="left"></div></header><content><div class="search"></div><div class="dw-options"></div></content>');
+        $el.html('<header><div class="left">' + options.title + '</div><div class="right"><i class="toggle-icon">-</i></div></header><content><div class="search"></div><div class="dw-options"></div></content>');
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
@@ -68,7 +70,28 @@
     }
 
     // Events
-    // aqui van los eventos...
+    var events = {
+      start: function($el, options){
+        events.toggleContent($el, options);
+      },
+      toggleContent: function($el, options){
+        var $header = $el.find('header');
+        var $content = $el.find('content');
+        var $icon = $el.find('.toggle-icon');
+        $header.on({
+          click: function(){
+            $content.slideToggle('fast', function(){
+              if($icon.html() == '-'){
+                $icon.html('+');
+              }else{
+                $icon.html('-');
+              }
+            });
+          }
+        });
+      }
+    }
+
 
     // jquery component stuff
     $.fn.dwFilter = function(methodOrOptions) {

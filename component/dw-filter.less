@@ -187,6 +187,16 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
 	float: right;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 
 
 
@@ -200,34 +210,72 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
   width: 100%;
   height: auto;
   font-family: 'Open sans';
+  background-color: #f6f3f3;
+  padding: 10px 10px 3px;
+  border-bottom: 1px solid #bfbfbf;
 
   header
   {
+    position: relative;
+    cursor: pointer;
 
     .left{
-
+      text-transform: uppercase;
+      color: #3778a5;
+      padding: 0 0 7px 0;
+      font-size: 15px;
+      font-weight: 400;
+      .noselect;
     }
 
     .right
     {
-
+      position: absolute;
+      top: -5px;
+      right: 0;
+      font-size: 21px;
+      color: #3778a5;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      text-align: right;
     }
 
   }
 
   content
   {
-      .search
-      {
+    box-sizing: border-box;
+    padding-bottom: 4px;
+    display: block;
 
-      }
-      .dw-options
-      {
+    .search
+    {
 
-        .dw-option
-        {
-          
-        }
+    }
+    .dw-options
+    {
+      padding: 0px 10px 5px 10px;
+
+      .dw-option
+      {
       }
+
+      label
+      {
+        position: relative;
+        font-size: 12px;
+        color: #B4B1B1;
+        bottom: -1px;
+
+        .noselect;
+      }
+      //
+      // input[type=checkbox] {
+      //   background-color: #f6f3f3;
+      //   display: inline-block;
+      //   visibility: visible;
+      // }
+    }
   }
 }
