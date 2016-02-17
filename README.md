@@ -24,9 +24,9 @@ The API accepts the next configurations:
 If is not define this attribute no show the search input on the element template.
 The possible options are:
 
-**inner**: Filter the options in the dw-filter element
+· **inner**: Filter the options in the dw-filter element
 
-**outer**: Return the string into the search input when you realize a **val** methods
+· **outer**: Return the string into the search input when you realize a **val** methods
 
 ### config
 ### data
@@ -43,8 +43,10 @@ Return the follow structure:
 }
 ```
 the **search** is the string of the **outer** .
+
 The **data** property is specific by **type** as follow:
-**chekbox**: Array of change ids in options
+
+· **chekbox**: Array of change ids in options
 ```
 {
   search: '',
