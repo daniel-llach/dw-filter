@@ -16,9 +16,11 @@
 <body>
   <div id="contetendorSample" class="contenedorFiltros">
     <div id="sample1" class="demoDiv"></div>
+    <div id="sample2" class="demoDiv"></div>
   </div>
 
   <script type="text/javascript">
+    // checkbox
     $('#sample1').dwFilter({
       title: 'Origen',
       type: 'checkbox',
@@ -53,6 +55,12 @@
           content: 'Super collisionador'
         }
       ]
+    });
+    // chain select
+    $('#sample2').dwFilter({
+      title: 'curso',
+      type: 'selectChain',
+      search: 'outer'
     });
   </script>
 </body>
