@@ -92,3 +92,12 @@ The **data** property is specific by **type** as follow:
 ```
 
 ## Destroy
+
+## Demo
+You can view a demo open index.html in your browser (localhost/your_rute).
+
+You must change the bower_components dependencies rutes as follow:
+```html
+<script src="../jquery/dist/jquery.min.js"></script>
+<script src="../underscore/underscore-min.js"></script>
+```
