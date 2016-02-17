@@ -27,6 +27,35 @@ The API accepts the next configurations:
 
 ### title
 ### type
+· **checkbox**: List of checkboxes. An example:
+```javascript
+$('#id').dwFilter({
+  title: 'Origen',
+  type: 'checkbox',
+  search: true,
+  config: {
+    key_attr: 'id',
+    value_attr: 'content'
+  },
+  data: [
+    {
+      id: 4522,
+      content: 'Real'
+    },
+    {
+      id: 5645,
+      content: 'Proyección 1'
+    },
+    {
+      id: 2378,
+      content: 'Proyección 2'
+    }
+  ]
+});
+```
+· **selectChain** List of selects
+
+
 ### search
 
 If is not define this attribute no show the search input on the element template.
@@ -63,31 +92,3 @@ The **data** property is specific by **type** as follow:
 ```
 
 ## Destroy
-
-
-### Example:
-```javascript
-$('#id').dwFilter({
-  title: 'Origen',
-  type: 'checkbox',
-  search: true,
-  config: {
-    key_attr: 'id',
-    value_attr: 'content'
-  },
-  data: [
-    {
-      id: 4522,
-      content: 'Real'
-    },
-    {
-      id: 5645,
-      content: 'Proyección 1'
-    },
-    {
-      id: 2378,
-      content: 'Proyección 2'
-    }
-  ]
-});
-```
