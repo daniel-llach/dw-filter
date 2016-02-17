@@ -21,13 +21,13 @@ $('#id').dwFilter();
 ```
 
 # 3.- API
-## Create
+## 3.1.- Init
 If the dwFilter() class has an object the API interprets that is a new element and create it.
 
 The API accepts the next configurations:
 
-### title
-### type
+### 3.1.1.- title
+### 3.1.2.- type
 · **checkbox**: List of checkboxes. An example:
 ```javascript
 $('#id').dwFilter({
@@ -57,7 +57,7 @@ $('#id').dwFilter({
 · **selectChain** List of selects
 
 
-### search
+### 3.1.3.- search
 
 If is not define this attribute no show the search input on the element template.
 The possible options are:
@@ -66,10 +66,10 @@ The possible options are:
 
 · **outer**: Return the string into the search input when you realize a **val** methods
 
-### config
-### data
+### 3.1.4.- config
+### 3.1.5.- data
 
-## Val
+## 3.2.- Val
 ```javascript
 $('#id').dwFilter('val');
 ```
@@ -92,9 +92,13 @@ The **data** property is specific by **type** as follow:
 }
 ```
 
-## Destroy
+## 3.2.- Destroy
+This methods empty the container div and remove class too.
+```javascript
+$('#id').dwFilter('destroy');
+```
 
-## Demo
+# 4.- Demo
 You can view a local demo installing the component and open /bower_components/dw-filter/index.html in your browser (localhost/your_rute).
 
 You must change the bower_components dependencies rutes as follow:
