@@ -4,7 +4,6 @@
     // Public methods
     var api = {
       init : function(options) {
-        console.log("dwFilter init... ");
         var $el = $(this);
         // deploy component structure
         methods.deployComponent($el, options);
@@ -18,21 +17,11 @@
       },
       val: function(){
         var $el = $(this);
-        var result = [];
-        var $options = $('.dw-options');
         var type = $el.data('type');
         // builds each modified object
         switch(type) {
           case 'checkbox':
-            $.each($options.find('.dw-option') , function(i, opt){
-              var $opt = $(opt);
-              var $optInput = $opt.find('input');
-              if( $optInput.is(':checked') ){
-                // arm
-                result.push($opt.data('value'));
-              }
-            });
-            return result
+            return methods.valCheckbox($el);
             break;
         }
       }
@@ -75,6 +64,19 @@
         if( options.search == 'inner' ){
           $search.toggleClass('hide');
         }
+      },
+      valCheckbox: function($el){
+        var result = [];
+        var $options = $el.find('.dw-options');
+        $.each($options.find('.dw-option') , function(i, opt){
+          var $opt = $(opt);
+          var $optInput = $opt.find('input');
+          if( $optInput.is(':checked') ){
+            // arm
+            result.push($opt.data('value'));
+          }
+        });
+        return result;
       }
     }
 
@@ -115,7 +117,6 @@
           var temp = $opt.data('content');
           temp = temp.toLowerCase();
           data = data.toLowerCase();
-          console.log(data, temp);
           if( temp.indexOf(data) != -1 ) {
             $opt.show();
           }else{
