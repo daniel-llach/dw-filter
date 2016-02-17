@@ -19,7 +19,10 @@ The API accepts the next configurations:
 ### title
 ### type
 ### search
-false, inner, outer
+If is not define this attribute no show the search input on the element template.
+The possible options are:
+**inner**: Filter the options in the dw-filter element
+**outer**: Return the string into the search input when you realize a **val** methods
 ### config
 ### data
 
@@ -27,9 +30,22 @@ false, inner, outer
 ```javascript
 $('#id').dwFilter('val');
 ```
-Return results val depending the type:
-**chekbox**: Array of ids. Ex: [23, 78, 44]
-
+Return the follow structure:
+```javascript
+{
+  search: '',
+  data: []
+}
+```
+the **search** is the string of the **outer** .
+The **data** property is specific by **type** as follow:
+**chekbox**: Array of change ids in options
+```
+{
+  search: '',
+  data: [23, 78, 44]
+}
+```
 
 ## Destroy
 
