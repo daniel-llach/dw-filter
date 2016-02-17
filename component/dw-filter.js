@@ -40,7 +40,7 @@
         methods.showSearch($el, options);
       },
       setTemplate : function($el, options){
-        $el.html('<header><div class="left">' + options.title + '</div><div class="right"><i class="toggle-icon">-</i></div></header><content><div class="search"><input type="text" name="search" id="dw-search" class="hide"></div><div class="dw-options"></div></content>');
+        $el.html('<header><div class="left">' + options.title + '</div><div class="right"><i class="icon-toggle open"></i></div></header><content><div class="search"><input type="text" name="search" id="dw-search" class="glass hide"></div><div class="dw-options"></div></content>');
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
@@ -89,14 +89,16 @@
       toggleContent: function($el, options){
         var $header = $el.find('header');
         var $content = $el.find('content');
-        var $icon = $el.find('.toggle-icon');
+        var $icon = $el.find('.icon-toggle');
         $header.on({
           click: function(){
             $content.slideToggle('fast', function(){
-              if($icon.html() == '-'){
-                $icon.html('+');
+              if( $icon.hasClass('open') ){
+                $icon.toggleClass('open');
+                $icon.toggleClass('close');
               }else{
-                $icon.html('-');
+                $icon.toggleClass('open');
+                $icon.toggleClass('close');
               }
             });
           }
@@ -108,8 +110,19 @@
           keyup: function(event){
             var inputData = $search.val();
             events.hideOptions($el, inputData, options);
+          },
+          focus: function(event){
+            $search.removeClass('glass');
+          },
+          focusout: function(event){
+            if($search.val().length > 0){
+              $search.removeClass('glass');
+            }else{
+              $search.addClass('glass');
+            }
           }
         });
+
       },
       hideOptions: function($el, data, options){
         $.each($el.find('.dw-option') , function(i, opt){

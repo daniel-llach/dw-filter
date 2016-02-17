@@ -231,14 +231,36 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
     .right
     {
       position: absolute;
-      top: -5px;
-      right: 0;
+      top: 2px;
+      right: -8px;
       font-size: 21px;
       color: #3778a5;
       cursor: pointer;
       width: 20px;
       height: 20px;
       text-align: right;
+
+      .icon-toggle
+      {
+        width: 18px;
+        height: 18px;
+        background-size: 18px !important;
+        background-position: -2px 2px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat;
+
+        &.open
+        {
+          background-image: url(svg/open.svg);
+        }
+
+        &.close
+        {
+          background-image: url(svg/close.svg);
+        }
+      }
     }
 
   }
@@ -255,7 +277,20 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
 
       input
       {
-        width: 100%;
+        width: 96%;
+        border-style: none;
+        height: 17px;
+        padding: 3px 4%;
+        color: #9B9797;
+        font-size: 12px;
+
+        &.glass
+        {
+          background-size: 14px !important;
+          background-position: center 4px;
+          background-image: url(svg/glass.svg);
+          background-repeat: no-repeat;
+        }
       }
     }
     .dw-options
