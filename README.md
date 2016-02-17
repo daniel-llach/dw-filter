@@ -15,7 +15,7 @@ A filter component for darwinEd.
 ```
 
 # 2.- Use
-Execute the dwFilter class on a selector. It will be rendered in this container and inherit its width.
+Execute the dwFilter class on a selector. It will be rendered a dw-filter element in this container inherit its position and width.
 ```javascript
 $('#id').dwFilter();
 ```
