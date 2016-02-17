@@ -1,12 +1,17 @@
 # dw-filter
 A filter component for darwinEd.
 
-# Use
+# 1.- Install (soon...)
+```javascript
+  bower install --save dw-filter
+```
+
+# 2.- Use
 ```javascript
 $('#id').dwFilter();
 ```
 
-# API
+# 3.- API
 ## Create
 If the dwFilter() class has an object the API interprets that is a new element and create it.
 
@@ -21,7 +26,6 @@ false, inner, outer
 ## Val
 
 ## Destroy
-
 
 
 ### Example:
