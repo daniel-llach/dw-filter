@@ -24,6 +24,12 @@ false, inner, outer
 ### data
 
 ## Val
+```javascript
+$('#id').dwFilter('val');
+```
+Return results val depending the type:
+**chekbox**: Array of ids. Ex: [23, 78, 44]
+
 
 ## Destroy
 
