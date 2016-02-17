@@ -16,13 +16,18 @@ $('#id').dwFilter();
 If the dwFilter() class has an object the API interprets that is a new element and create it.
 
 The API accepts the next configurations:
+
 ### title
 ### type
 ### search
+
 If is not define this attribute no show the search input on the element template.
 The possible options are:
+
 **inner**: Filter the options in the dw-filter element
+
 **outer**: Return the string into the search input when you realize a **val** methods
+
 ### config
 ### data
 
