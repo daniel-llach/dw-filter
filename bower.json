@@ -1,32 +1,30 @@
 {
-  "name": "dw-filter",
-  "version": "0.0.1",
-  "authors": [
-    "daniel-llach <daniel.llach@gmail.com>"
-  ],
-  "description": "A filter component for darwinEd",
-  "main": [
-    "components/dw-filter.js",
-    "components/dw-filter.css",
-  ],
-  "moduleType": [
-    "amd"
-  ],
-  "keywords": [
-    "filter",
-    "dw",
-    "darwined"
-  ],
-  "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "~2.2.0"
-  }
+	"name": "dw-filter",
+	"version": "0.0.1",
+	"authors": [
+		"daniel-llach <daniel.llach@gmail.com>"
+	],
+	"description": "A filter component for darwinEd",
+	"main": [
+		"components/dw-filter.js",
+		"components/dw-filter.css"
+	],
+	"moduleType": "amd",
+	"keywords": [
+		"filter",
+		"dw",
+		"darwined"
+	],
+	"license": "MIT",
+	"homepage": "",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"jquery": "~2.2.0"
+	}
 }
