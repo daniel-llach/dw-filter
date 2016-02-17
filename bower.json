@@ -5,7 +5,10 @@
     "daniel-llach <daniel.llach@gmail.com>"
   ],
   "description": "A filter component for darwinEd",
-  "main": "index.html",
+  "main": [
+    "components/dw-filter.js",
+    "components/dw-filter.css",
+  ],
   "moduleType": [],
   "keywords": [
     "filter",
