@@ -9,7 +9,9 @@
     "components/dw-filter.js",
     "components/dw-filter.css",
   ],
-  "moduleType": [],
+  "moduleType": [
+    "amd"
+  ],
   "keywords": [
     "filter",
     "dw",
