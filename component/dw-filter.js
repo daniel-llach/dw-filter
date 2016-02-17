@@ -49,6 +49,12 @@
         }
       },
       setTemplate : function($el, options){
+        var template;
+        $.get("./component/templates/checkbox.html", function( result ) {
+            template = result;
+        });
+        console.log(template);
+
         if (typeof options !== 'undefined') {
           if (typeof options.title === 'undefined') {
             var titleVal = '';
