@@ -2,8 +2,16 @@
 A filter component for darwinEd.
 
 # 1.- Install
+1.1.- Install dependencies from bower:
 ```javascript
   bower install --save dw-filter
+```
+1.2.- Include dependencies in html:
+```html
+<!-- dw-filter dependencies -->
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./component/dw-filter.js"></script>
+<link rel="stylesheet" type="text/css" href="./component/dw-filter.css">
 ```
 
 # 2.- Use
