@@ -94,7 +94,7 @@ The **data** property is specific by **type** as follow:
 ## Destroy
 
 ## Demo
-You can view a demo open index.html in your browser (localhost/your_rute).
+You can view a local demo installing the component and open /bower_components/dw-filter/index.html in your browser (localhost/your_rute).
 
 You must change the bower_components dependencies rutes as follow:
 ```html
