@@ -1,7 +1,7 @@
-# dw-filter
+# dw-filter (under construction...)
 A filter component for darwinEd.
 
-# 1.- Install (soon...)
+# 1.- Install
 ```javascript
   bower install --save dw-filter
 ```
