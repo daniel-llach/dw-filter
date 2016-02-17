@@ -7,8 +7,6 @@
         var $el = $(this);
         // deploy component structure
         methods.deployComponent($el, options);
-        // init events
-        events.start($el, options);
       },
       destroy: function(){
         var $el = $(this);
@@ -40,32 +38,38 @@
         // convert the div into a dw-filter component
         $el.addClass('dw-filter');
         // get filter template
-        methods.setTemplate($el, options);
-        if (typeof options !== 'undefined') {
-          // inject options according to filter type
-          methods.setOptionTemplate($el, options);
-          // show search input
-          methods.showSearch($el, options);
-        }
+        methods.getTemplate($el, options);
       },
-      setTemplate : function($el, options){
-        var template;
-        $.get("./component/templates/checkbox.html", function( result ) {
-            template = result;
+      getTemplate: function($el, options){
+        $.get("./component/templates/dw-filter.html", function( result ) {
+          templateContent = result;
+          methods.setTemplate($el, templateContent, options);
         });
-        console.log(template);
-
+      },
+      setTemplate : function($el, templateContent, options){
         if (typeof options !== 'undefined') {
           if (typeof options.title === 'undefined') {
             var titleVal = '';
           }else{
             var titleVal = options.title;
           }
-          $el.html('<header><div class="left">' + titleVal + '</div><div class="right"><i class="icon-toggle open"></i></div></header><content><div class="search"><input type="text" name="search" id="dw-search" class="glass hide"></div><div class="dw-options"></div></content>');
+          var template = _.template(templateContent);
+          $el.html( template({titleVal: titleVal}) );
         }else{
-          $el.html('<header><div class="left"></div><div class="right"><i class="icon-toggle open"></i></div></header><content><div class="search"><input type="text" name="search" id="dw-search" class="glass hide"></div><div class="dw-options"></div></content>');
+          var template = _.template(templateContent);
+          $el.html( template({titleVal: ''}) );
           $el.find('content').css('display','none');
         }
+
+        if (typeof options !== 'undefined') {
+          // inject options according to filter type
+          methods.setOptionTemplate($el, options);
+          // show search input
+          methods.showSearch($el, options);
+          // init events
+          events.start($el, options);
+        }
+
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
@@ -83,14 +87,35 @@
         });
         var key = options.config['key_attr'];
         var value = options.config['value_attr'];
-        $.each(options.data, function(i, data){
-          $el.find('.dw-options').append('<div class="dw-option" data-value="' + data[key] + '" data-content="' + data[value] + '"><input type="checkbox" name="' + data[value] + '" id="' + data[value] + '"><label for="' + data[value] + '">' + data[value] + '</label></div>');
+
+        $.get("./component/templates/checkbox.html", function( result ) {
+          var template = _.template(result);
+          $.each(options.data, function(i, data){
+            var contentHtml = template({
+              key: data[key],
+              value: data[value]
+            });
+            $el.find('.dw-options').append(contentHtml);
+          });
         });
       },
       selectChainTemplate: function($el, options){
         $el.data({
           type: options.type
         });
+        // var key = options.config['key_attr'];
+        // var value = options.config['value_attr'];
+
+        // $.get("./component/templates/checkbox.html", function( result ) {
+        //   var template = _.template(result);
+        //   $.each(options.data, function(i, data){
+        //     var contentHtml = template({
+        //       key: data[key],
+        //       value: data[value]
+        //     });
+        //     $el.find('.dw-options').append(contentHtml);
+        //   });
+        // });
         console.log("selectChain template ... ");
       },
       showSearch: function($el, options){
@@ -212,9 +237,7 @@
             }
           }
         });
-
       }
-
     }
 
 

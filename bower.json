@@ -25,7 +25,6 @@
   ],
   "dependencies": {
     "jquery": "~2.2.0",
-    "requirejs": "^2.1.22",
     "underscore": "^1.8.3"
   }
 }
