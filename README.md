@@ -211,7 +211,16 @@ $('#id').dwFilter('destroy');
 You can view a local demo installing the component and open /bower_components/dw-filter/**index.html** in your browser (localhost/your_rute).
 
 You must change the bower_components dependencies rutes as follow:
+
 ```html
 <script src="../jquery/dist/jquery.min.js"></script>
 <script src="../underscore/underscore-min.js"></script>
+```
+
+# 5.- Possible problems
+### 5.1.- Don't show svg background-image:
+
+Confirm that your server are serving well the svg files, add to your .htacces the follow:
+```bash
+AddType image/svg+xml .svg .svgz
 ```
