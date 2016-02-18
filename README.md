@@ -182,6 +182,23 @@ The **data** property is specific by **type** as follow:
 }
 ```
 
+· **selectChain**: Array of change ids in options
+```
+{
+  search: "text",
+	data: [
+		{
+			name: 'The select',
+			content: 1212 // id sede
+		},
+		{
+			name: 'Supe select',
+			content: null // no id select
+		}
+	]
+}
+```
+
 ## 3.2.- Destroy
 This methods empty the container div and remove class too.
 ```javascript
