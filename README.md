@@ -3,6 +3,15 @@ A filter component for **darwinEd©** app of **Foris**.
 
 <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/dw-filter.png?raw=true">
 
+# Index:
+
+<a href="#1--install">1.- Install</a>
+<a href="#2--use">2.- Use</a>
+<a href="#3--api">3.- API</a>
+<a href="#4--listeners">4.- Listeners</a>
+<a href="#5--demo">5.- Demo</a>
+<a href="#6--problems">6.- Demo</a>
+
 # 1.- Install
 1.1.- Install dependencies from bower:
 ```javascript
@@ -207,7 +216,19 @@ This methods empty the container div and remove class too.
 $('#id').dwFilter('destroy');
 ```
 
-# 4.- Demo
+# 4.- Listeners
+
+When change any value that affects the the filter data the selected div when w-filter has instantiated update and trigger a change events that you can listen as follow:
+´´´javascript
+$('#id').on({
+  change: function(event){
+    var result = $('#id').data('result');
+    console.log("sample1 data: ", result);
+  }
+});
+´´´
+
+# 5.- Demo
 You can view a local demo installing the component and open /bower_components/dw-filter/**index.html** in your browser (localhost/your_rute).
 
 You must change the bower_components dependencies rutes as follow:
@@ -217,7 +238,7 @@ You must change the bower_components dependencies rutes as follow:
 <script src="../underscore/underscore-min.js"></script>
 ```
 
-# 5.- Possible problems
+# 6.- Possible problems
 ### 5.1.- Don't show svg background-image:
 
 Confirm that your server are serving well the svg files, add to your ***.htacces*** the follow:
