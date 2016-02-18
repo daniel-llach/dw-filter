@@ -85,7 +85,7 @@ the **search** is the string of the **outer** .
 The **data** property is specific by **type** as follow:
 
 · **chekbox**:
-[<img src="/img/chekbox.png">]
+[<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">]
 Array of change ids in options
 ```
 {
