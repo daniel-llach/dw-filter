@@ -61,6 +61,91 @@ $('#id').dwFilter({
 ```
 · **selectChain** List of selects
 
+<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">
+
+An example:
+```javascript
+$('#sample2').dwFilter({
+  title: 'title2',
+  type: 'selectChain',
+  search: 'outer',
+  config: {
+    key_attr: 'id',
+    name_attr: 'name',
+    value_attr: 'content',
+    options_key_attr: 'id',
+    options_value_attr: 'content',
+    options_active_attr: 'selected'
+  },
+  data: [
+    {
+      id: 1555,
+      name: 'The select',
+      content: [
+        {
+          id: 4565,
+          content: 'The option 1',
+          selected: false
+        },
+        {
+          id: 1212,
+          content: 'The option 2',
+          selected: true
+        }
+      ]
+    },
+    {
+      id: 3434,
+      name: 'Super select',
+      content: [
+        {
+          id: 4565,
+          content: 'Super option 1',
+          selected: false
+        },
+        {
+          id: 1212,
+          content: 'Super option 2',
+          selected: false
+        }
+      ]
+    },
+    {
+      id: 2211,
+      name: 'What a select',
+      content: [
+        {
+          id: 4565,
+          content: 'What option 1',
+          selected: false
+        },
+        {
+          id: 1212,
+          content: 'What option 2',
+          selected: true
+        }
+      ]
+    },
+    {
+      id: 4535,
+      name: 'Original select',
+      content: [
+        {
+          id: 4565,
+          content: 'Original option 1',
+          selected: false
+        },
+        {
+          id: 1212,
+          content: 'Original option 2',
+          selected: true
+        }
+      ]
+    }
+  ]
+});
+```
+
 
 ### 3.1.3.- search
 
