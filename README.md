@@ -220,7 +220,7 @@ You must change the bower_components dependencies rutes as follow:
 # 5.- Possible problems
 ### 5.1.- Don't show svg background-image:
 
-Confirm that your server are serving well the svg files, add to your .htacces the follow:
+Confirm that your server are serving well the svg files, add to your ***.htacces*** the follow:
 ```bash
 AddType image/svg+xml .svg .svgz
 ```
