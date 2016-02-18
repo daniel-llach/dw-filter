@@ -28,11 +28,12 @@ The API accepts the next configurations:
 
 ### 3.1.1.- title
 ### 3.1.2.- type
-· **checkbox**:
+
+· **checkbox**: List of checkboxes
 
 <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">
 
-List of checkboxes. An example:
+An example:
 ```javascript
 $('#id').dwFilter({
   title: 'Origen',
