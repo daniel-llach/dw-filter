@@ -30,7 +30,7 @@ The API accepts the next configurations:
 ### 3.1.2.- type
 · **checkbox**:
 
-[<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">]
+<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">
 
 List of checkboxes. An example:
 ```javascript
