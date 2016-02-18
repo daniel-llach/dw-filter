@@ -103,20 +103,26 @@
         $el.data({
           type: options.type
         });
-        // var key = options.config['key_attr'];
-        // var value = options.config['value_attr'];
+        var key = options.config['key_attr'];
+        var name = options.config['name_attr'];
+        var value = options.config['value_attr'];
 
-        // $.get("./component/templates/checkbox.html", function( result ) {
-        //   var template = _.template(result);
-        //   $.each(options.data, function(i, data){
-        //     var contentHtml = template({
-        //       key: data[key],
-        //       value: data[value]
-        //     });
-        //     $el.find('.dw-options').append(contentHtml);
-        //   });
-        // });
-        console.log("selectChain template ... ");
+        $.get("./component/templates/selectChain.html", function( result ) {
+          var template = _.template(result);
+          $.each(options.data, function(i, data){
+            var contentHtml = template({
+              key: data[key],
+              name: data[name],
+              value: data[value]
+            });
+            $el.find('.dw-options').append(contentHtml);
+          });
+          // events for selectChain
+          events.selectChain($el, options);
+
+        });
+
+
       },
       showSearch: function($el, options){
         var $search = $el.find('.search input');
@@ -152,7 +158,23 @@
         };
         var $options = $el.find('.dw-options');
         // options
+        $.each($options.find('.dw-option') , function(i, opt){
+          var $opt = $(opt);
+          var $optInput = $opt.find('select');
 
+          var content = function(){
+            if($optInput.val() == 'undefined' || $optInput.val() == 'none'){
+              return null;
+            }else{
+              return parseInt( $optInput.val() );
+            }
+          }();
+
+          result.data.push({
+            name: $opt.attr('title'),
+            content: content
+          });
+        });
 
         // outerSearch
         var outerSearch = methods.getOuterSearch($el);
@@ -235,6 +257,13 @@
             }else{
               $search.addClass('glass');
             }
+          }
+        });
+      },
+      selectChain: function($el, options){
+        $el.find('select').on({
+          change: function(event){
+            console.log("change selected");
           }
         });
       }

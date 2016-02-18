@@ -197,6 +197,12 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
                                   not supported by any browser */
 }
 
+.noApparence
+{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 
 
@@ -293,6 +299,8 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
           background-repeat: no-repeat;
         }
       }
+
+
     }
     .dw-options
     {
@@ -309,8 +317,39 @@ src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold.ttf') fo
           font-size: 12px;
           color: #B4B1B1;
           bottom: -1px;
+          font-family: 'Open sans';
 
           .noselect;
+        }
+
+        select
+        {
+          border-color: #bfbfbf;
+          width: 100%;
+          padding: 4px;
+          margin-bottom: 5px;
+          background: url('svg/down.svg') no-repeat 97% center;
+          background-size: 11px !important;
+          color: #878787;
+          font-size: 12px;
+          font-family: 'Open sans';
+
+          .noApparence;
+
+          .unselected
+          {
+            color: red;
+          }
+        }
+
+
+
+        &.selectChain
+        {
+          &:first-child
+          {
+            margin-top: 8px;
+          }
         }
       }
 

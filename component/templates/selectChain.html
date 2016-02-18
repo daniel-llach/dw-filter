@@ -1,4 +1,8 @@
-<!-- <div class="dw-option" data-value="<%- key %>" data-content="<%- value %>">
-  <input type="checkbox" name="<%- value %>" id="<%- value %>">
-  <label for="<%- value %>"><%- value %></label>
-</div> -->
+<div class="dw-option selectChain" data-value="<%- key %>" title="<%- name %>">
+  <select>
+    <option value="none" class="unselected">Seleccione un(a) <%- name %></option>
+    <% _.each(value, function(option) { %>
+      <option value="<%= option.id %>" <% if(option.selected == true) { %> selected <% noSelected = 0; } %> ><%= option.content %></option>
+    <% }); %>
+  </select>
+</div>
