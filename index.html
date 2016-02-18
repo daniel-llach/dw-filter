@@ -143,6 +143,30 @@
         }
       ]
     });
+
+
+    // listeners
+    var smpl1 = $('#sample1');
+    var smpl2 = $('#sample2');
+    var smpl3 = $('#sample3');
+    smpl1.on({
+      change: function(event){
+        var result = smpl1.data('result');
+        console.log("sample1 data: ", result);
+      }
+    });
+    smpl2.on({
+      change: function(event){
+        var result = smpl2.data('result');
+        console.log("sample2 data: ", result);
+      }
+    });
+    smpl3.on({
+      change: function(event){
+        var result = smpl3.data('result');
+        console.log("sample3 data: ", result);
+      }
+    });
   </script>
 </body>
 </html>

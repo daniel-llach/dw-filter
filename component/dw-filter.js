@@ -13,8 +13,10 @@
         $el.empty();
         $el.removeClass('dw-filter');
       },
-      val: function(){
-        var $el = $(this);
+      val: function($el){
+        if( typeof $el == null ){
+          var $el = $(this);
+        }
         var type = $el.data('type');
 
         // builds each modified object
@@ -106,6 +108,9 @@
             });
             $el.find('.dw-options').append(contentHtml);
           });
+
+          // events for checkboxes
+          events.checkboxes($el, options);
         });
       },
       selectChainTemplate: function($el, options){
@@ -161,6 +166,9 @@
         if(typeof outerSearch !== 'undefined'){
           result.search = outerSearch;
         }
+        // update $el data
+        $el.data("result", result);
+        methods.passResult($el);
         return result;
       },
       valSelectChain: function($el){
@@ -193,6 +201,9 @@
         if(typeof outerSearch !== 'undefined'){
           result.search = outerSearch;
         }
+        // update $el data
+        $el.data("result", result);
+        this.passResult($el);
         return result;
       },
       innerSearch: function($el, inputData, options){
@@ -219,6 +230,9 @@
             $opt.hide();
           }
         });
+      },
+      passResult: function($el){
+        $el.trigger('change');
       }
     }
 
@@ -259,6 +273,9 @@
                 methods.outerSearch($el, inputData, options)
                 break;
             }
+            if(options.search == 'outer'){
+              api.val($el);
+            }
           },
           focus: function(event){
             $search.removeClass('glass');
@@ -272,15 +289,21 @@
           }
         });
       },
+      checkboxes: function($el, $options){
+        $el.find('input').on({
+          change: function(event){
+            api.val($el);
+          }
+        });
+      },
       selectChain: function($el, options){
         $el.find('select').on({
           change: function(event){
-            console.log("change selected");
+            api.val($el);
           }
         });
       }
     }
-
 
     // jquery component stuff
     $.fn.dwFilter = function(methodOrOptions) {
