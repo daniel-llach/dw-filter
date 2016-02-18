@@ -6,7 +6,7 @@ A filter component for darwinEd.
 ```javascript
   bower install --save dw-filter
 ```
-1.2.- Include dependencies in html:
+1.2.- Include dependencies in your html:
 ```html
 <!-- dw-filter dependencies -->
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
