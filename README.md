@@ -146,10 +146,10 @@ $('#sample2').dwFilter({
 });
 ```
 
-
 ### 3.1.3.- search
 
-If is not define this attribute no show the search input on the element template.
+***If is not define this attribute no show the search input on the element template***.
+
 The possible options are:
 
 · **inner**: Filter the options in the dw-filter element
