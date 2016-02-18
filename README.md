@@ -40,12 +40,13 @@ The API accepts the next configurations:
 ### 3.1.1.- title
 ### 3.1.2.- type
 
-· **checkbox**: List of checkboxes
+checkbox
+  : List of checkboxes
 
-<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">
+  : <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">
 
-An example:
-```javascript
+  : An example:
+  : ```javascript
 $('#id').dwFilter({
   title: 'Origen',
   type: 'checkbox',
