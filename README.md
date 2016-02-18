@@ -28,7 +28,11 @@ The API accepts the next configurations:
 
 ### 3.1.1.- title
 ### 3.1.2.- type
-· **checkbox**: List of checkboxes. An example:
+· **checkbox**:
+
+[<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">]
+
+List of checkboxes. An example:
 ```javascript
 $('#id').dwFilter({
   title: 'Origen',
@@ -84,9 +88,7 @@ the **search** is the string of the **outer** .
 
 The **data** property is specific by **type** as follow:
 
-· **chekbox**:
-[<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/checkbox.png?raw=true">]
-Array of change ids in options
+· **chekbox**: Array of change ids in options
 ```
 {
   search: '',
