@@ -18,12 +18,18 @@
   <div id="contetendorSample" class="contenedorFiltros">
     <div id="sample1" class="demoDiv"></div>
     <div id="sample2" class="demoDiv"></div>
+    <div id="sample3" class="demoDiv"></div>
   </div>
 
   <script type="text/javascript">
     // checkbox
     $('#sample1').dwFilter({
       title: 'Title1',
+      type:'fromTo',
+      search: false
+    });
+    $('#sample2').dwFilter({
+      title: 'Title2',
       type: 'checkbox',
       search: 'inner',
       config: {
@@ -58,8 +64,8 @@
       ]
     });
     // chain select
-    $('#sample2').dwFilter({
-      title: 'title2',
+    $('#sample3').dwFilter({
+      title: 'title3',
       type: 'selectChain',
       search: 'outer',
       config: {
@@ -136,7 +142,6 @@
           ]
         }
       ]
-
     });
   </script>
 </body>

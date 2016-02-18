@@ -28,6 +28,9 @@
           case undefined:
             return 'No type defined in this $el data'
             break;
+          default:
+            return 'This type not exist'
+            break;
         }
       }
     };
@@ -79,6 +82,12 @@
           case 'selectChain':
             methods.selectChainTemplate($el, options);
             break;
+          case 'fromTo':
+            methods.fromToTemplate($el, options);
+            break;
+          default:
+            console.log(options.type + ": is not a valid type, or not have a template.");
+            break;
         }
       },
       checkboxTemplate: function($el, options){
@@ -123,6 +132,9 @@
         });
 
 
+      },
+      fromToTemplate: function($el, options){
+        console.log("Template fromTo");
       },
       showSearch: function($el, options){
         var $search = $el.find('.search input');
