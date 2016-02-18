@@ -1,5 +1,5 @@
 # dw-filter (under construction...)
-A filter component for darwinEd.
+A filter component for **darwinEd©** app of **Foris**.
 
 <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/dw-filter.png?raw=true">
 
