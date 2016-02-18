@@ -5,12 +5,12 @@ A filter component for **darwinEd©** app of **Foris**.
 
 # Index:
 
-<a href="#1--install">1.- Install</a>
-<a href="#2--use">2.- Use</a>
-<a href="#3--api">3.- API</a>
-<a href="#4--listeners">4.- Listeners</a>
-<a href="#5--demo">5.- Demo</a>
-<a href="#6--problems">6.- Demo</a>
+1.- <a href="#1--install">Install</a>
+2.- <a href="#2--use">Use</a>
+3.- <a href="#3--api">API</a>
+4.- <a href="#4--listeners">Listeners</a>
+5.- <a href="#5--demo">Demo</a>
+6.- <a href="#6--problems">Problems</a>
 
 # 1.- Install
 1.1.- Install dependencies from bower:
