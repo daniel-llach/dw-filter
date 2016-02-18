@@ -1,6 +1,6 @@
 <div class="dw-option selectChain" data-value="<%- key %>" title="<%- name %>">
   <select>
-    <option value="none" class="unselected">Seleccione un(a) <%- name %></option>
+    <option value="none" class="unselected"><%- name %></option>
     <% _.each(value, function(option) { %>
       <option value="<%= option.id %>" <% if(option.selected == true) { %> selected <% noSelected = 0; } %> ><%= option.content %></option>
     <% }); %>

@@ -84,7 +84,9 @@ the **search** is the string of the **outer** .
 
 The **data** property is specific by **type** as follow:
 
-· **chekbox**: Array of change ids in options
+· **chekbox**:
+[<img src="/img/chekbox.png">]
+Array of change ids in options
 ```
 {
   search: '',
