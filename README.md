@@ -148,13 +148,13 @@ $('#sample2').dwFilter({
 
 ### 3.1.3.- search
 
-***If is not define this attribute no show the search input on the element template***.
-
 The possible options are:
 
 · **inner**: Filter the options in the dw-filter element
 
 · **outer**: Return the string into the search input when you realize a **val** methods
+
+· ***If is not define this attribute no show the search input on the element template***
 
 ### 3.1.4.- config
 ### 3.1.5.- data
