@@ -1,6 +1,8 @@
 # dw-filter (under construction...)
 A filter component for darwinEd.
 
+<img src="https://github.com/daniel-llach/dw-filter/blob/master/img/dw-filter.png?raw=true">
+
 # 1.- Install
 1.1.- Install dependencies from bower:
 ```javascript
