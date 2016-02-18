@@ -175,7 +175,7 @@ the **search** is the string of the **outer** .
 The **data** property is specific by **type** as follow:
 
 · **chekbox**: Array of change ids in options
-```
+```javascript
 {
   search: '',
   data: [23, 78, 44]
@@ -183,7 +183,7 @@ The **data** property is specific by **type** as follow:
 ```
 
 · **selectChain**: Array of change ids in options
-```
+```javascript
 {
   search: "text",
 	data: [
