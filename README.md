@@ -12,8 +12,9 @@ A filter component for **darwinEd©** app of **Foris**.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#311--title">3.1.1.- Title</a> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#312--type">3.1.2.- Type</a> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#313--search">3.1.3.- Search</a> </br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#314--config">3.1.4.- Config</a> </br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#315--data">3.1.5.- Data</a> </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#314--height">3.1.4.- Height</a> </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#315--config">3.1.5.- Config</a> </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#316--data">3.1.6.- Data</a> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#32--val">3.2.- Val</a> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--destroy">3.3.- Destroy</a> </br>
 <a href="#4--listeners">4.- Listeners</a> </br>
@@ -175,8 +176,20 @@ The possible options are:
 
 · ***If is not define this attribute no show the search input on the element template***
 
-### 3.1.4.- config
-### 3.1.5.- data
+### 3.1.4.- height
+
+· **auto**: The element is high as its contents.
+
+· **number + px / %**: A specific height in px or %. Example:
+```javascript
+height: '250px'
+```
+
+· *if you not specified the value will be 132px
+
+
+### 3.1.5.- config
+### 3.1.6.- data
 
 ## 3.2.- Val
 ```javascript

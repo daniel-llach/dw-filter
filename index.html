@@ -25,8 +25,72 @@
     // checkbox
     $('#sample1').dwFilter({
       title: 'Title1',
-      type:'fromTo',
-      search: false
+      type:'selectChain',
+      search: false,
+      height: '300px',
+      config: {
+        key_attr: 'id',
+        name_attr: 'name',
+        value_attr: 'content',
+        options_key_attr: 'id',
+        options_value_attr: 'content',
+        options_active_attr: 'selected'
+      },
+      data: [
+        {
+          id: 1555,
+          name: 'From',
+          content: [
+            {
+              id: 4565,
+              content: '2016 - 1 semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2016 - 2 Semester',
+              selected: true
+            },
+            {
+              id: 1212,
+              content: '2017 - 1 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 2 Semester',
+              selected: false
+            }
+          ]
+        },
+        {
+          id: 3434,
+          name: 'To',
+          content: [
+            {
+              id: 4565,
+              content: '2016 - 1 semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2016 - 2 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 1 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 2 Semester',
+              selected: true
+            }
+          ]
+        }
+      ]
+
     });
     $('#sample2').dwFilter({
       title: 'Title2',

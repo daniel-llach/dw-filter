@@ -69,6 +69,10 @@
           methods.setOptionTemplate($el, options);
           // show search input
           methods.showSearch($el, options);
+          // set height
+          if(typeof options.height !== 'undefined'){
+            methods.setHeight($el, options);
+          }
           // init events
           events.start($el, options);
         }
@@ -81,9 +85,6 @@
             break;
           case 'selectChain':
             methods.selectChainTemplate($el, options);
-            break;
-          case 'fromTo':
-            methods.fromToTemplate($el, options);
             break;
           default:
             console.log(options.type + ": is not a valid type, or not have a template.");
@@ -133,13 +134,25 @@
           events.selectChain($el, options);
         });
       },
-      fromToTemplate: function($el, options){
-        console.log("Template fromTo");
-      },
       showSearch: function($el, options){
         var $search = $el.find('.search input');
         if( options.search == 'inner' || options.search == 'outer' ){
           $search.toggleClass('hide');
+        }
+      },
+      setHeight: function($el, options){
+        var $options = $el.find('.dw-options');
+        var heightVal = options.height;
+        console.log("heightVal: ", heightVal);
+        console.log("heightVal.indexOf('px'): ", heightVal.indexOf('px'));
+        if(heightVal == 'auto'){
+          $options.css({
+            height: 'auto'
+          });
+        }else if(heightVal.indexOf('px') >= 0 || heightVal.indexOf('px') >= 0){
+          $options.css({
+            height: options.height
+          });
         }
       },
       valCheckbox: function($el){
