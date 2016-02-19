@@ -227,6 +227,7 @@ $('#id').dwFilter('destroy');
 # 4.- Listeners
 
 When change any value that affects the the filter data the selected div when w-filter has instantiated update and trigger a change events that you can listen as follow:
+
 ´´´javascript
 $('#id').on({
   change: function(event){
