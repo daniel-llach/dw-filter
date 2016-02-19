@@ -14,8 +14,8 @@
         $el.removeClass('dw-filter');
       },
       val: function($el){
-        if( typeof $el == null ){
-          var $el = $(this);
+        if($el === null ){
+          $el = $(this);
         }
         var type = $el.data('type');
 
@@ -23,16 +23,12 @@
         switch(type) {
           case 'checkbox':
             return methods.valCheckbox($el);
-            break;
           case 'selectChain':
             return methods.valSelectChain($el);
-            break;
           case undefined:
-            return 'No type defined in this $el data'
-            break;
+            return 'No type defined in this $el data';
           default:
-            return 'This type not exist'
-            break;
+            return 'This type not exist';
         }
       }
     };
@@ -52,16 +48,18 @@
         });
       },
       setTemplate : function($el, templateContent, options){
+        var titleVal = '';
+        var template;
         if (typeof options !== 'undefined') {
           if (typeof options.title === 'undefined') {
-            var titleVal = '';
+            titleVal = '';
           }else{
-            var titleVal = options.title;
+            titleVal = options.title;
           }
-          var template = _.template(templateContent);
+          template = _.template(templateContent);
           $el.html( template({titleVal: titleVal}) );
         }else{
-          var template = _.template(templateContent);
+          template = _.template(templateContent);
           $el.html( template({titleVal: ''}) );
           $el.find('content').css('display','none');
         }
@@ -96,8 +94,8 @@
         $el.data({
           type: options.type
         });
-        var key = options.config['key_attr'];
-        var value = options.config['value_attr'];
+        var key = options.config.key_attr;
+        var value = options.config.value_attr;
 
         $.get("./component/templates/checkbox.html", function( result ) {
           var template = _.template(result);
@@ -117,9 +115,9 @@
         $el.data({
           type: options.type
         });
-        var key = options.config['key_attr'];
-        var name = options.config['name_attr'];
-        var value = options.config['value_attr'];
+        var key = options.config.key_attr;
+        var name = options.config.name_attr;
+        var value = options.config.value_attr;
 
         $.get("./component/templates/selectChain.html", function( result ) {
           var template = _.template(result);
@@ -133,10 +131,7 @@
           });
           // events for selectChain
           events.selectChain($el, options);
-
         });
-
-
       },
       fromToTemplate: function($el, options){
         console.log("Template fromTo");
@@ -234,7 +229,7 @@
       passResult: function($el){
         $el.trigger('change');
       }
-    }
+    };
 
     // Events
     var events = {
@@ -267,10 +262,10 @@
             var inputData = $search.val();
             switch(options.search){
               case 'inner':
-                methods.innerSearch($el, inputData, options)
+                methods.innerSearch($el, inputData, options);
                 break;
               case 'outer':
-                methods.outerSearch($el, inputData, options)
+                methods.outerSearch($el, inputData, options);
                 break;
             }
             if(options.search == 'outer'){
@@ -303,7 +298,7 @@
           }
         });
       }
-    }
+    };
 
     // jquery component stuff
     $.fn.dwFilter = function(methodOrOptions) {
