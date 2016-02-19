@@ -18,10 +18,10 @@ A filter component for **darwinEd©** app of **Foris**.
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--destroy">3.3.- Destroy</a> </br>
 <a href="#4--listeners">4.- Listeners</a> </br>
 <a href="#5--demo">5.- Demo</a> </br>
-<a href="#6--problems">6.- Demo</a> </br>
+<a href="#6--possible-problems">6.- Possible problems</a> </br>
 
 # 1.- Install
-1.1.- Install dependencies from bower:
+1.1.- Install dependencies from bower into your project
 ```javascript
   bower install --save dw-filter
 ```
@@ -248,7 +248,7 @@ You must change the bower_components dependencies rutes as follow:
 ```
 
 # 6.- Possible problems
-### 5.1.- Don't show svg background-image:
+### 6.1.- Don't show svg background-image:
 
 Confirm that your server are serving well the svg files, add to your ***.htacces*** the follow:
 ```bash
