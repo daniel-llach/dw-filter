@@ -228,14 +228,14 @@ $('#id').dwFilter('destroy');
 
 When change any value that affects the the filter data the selected div when w-filter has instantiated update and trigger a change events that you can listen as follow:
 
-´´´javascript
+```javascript
 $('#id').on({
   change: function(event){
     var result = $('#id').data('result');
     console.log("sample1 data: ", result);
   }
 });
-´´´
+```
 
 # 5.- Demo
 You can view a local demo installing the component and open /bower_components/dw-filter/**index.html** in your browser (localhost/your_rute).
