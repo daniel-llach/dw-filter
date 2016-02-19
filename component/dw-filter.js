@@ -300,6 +300,8 @@
       checkboxes: function($el){
         $el.find('input').on({
           change: function(event){
+            event.preventDefault();
+            event.stopPropagation();
             api.val($el);
           }
         });
@@ -307,6 +309,8 @@
       selectChain: function($el){
         $el.find('select').on({
           change: function(event){
+            event.preventDefault();
+            event.stopPropagation();
             api.val($el);
           }
         });
