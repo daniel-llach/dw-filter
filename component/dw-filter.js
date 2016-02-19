@@ -108,7 +108,7 @@
           });
 
           // events for checkboxes
-          events.checkboxes($el, options);
+          events.checkboxes($el);
         });
       },
       selectChainTemplate: function($el, options){
@@ -284,14 +284,14 @@
           }
         });
       },
-      checkboxes: function($el, $options){
+      checkboxes: function($el){
         $el.find('input').on({
           change: function(event){
             api.val($el);
           }
         });
       },
-      selectChain: function($el, options){
+      selectChain: function($el){
         $el.find('select').on({
           change: function(event){
             api.val($el);
