@@ -1,24 +1,28 @@
 // dwFilter
 (function( $ ){
+  "use strict";
 
     // Public methods
-    var api = {
+    let api = {
       init : function(options) {
-        var $el = $(this);
+        const $el = $(this);
         // deploy component structure
-        methods.deployComponent($el, options);
+        let deployment = new Promise(function(resolve, reject){
+          methods.deployComponent($el, options);
+          resolve();
+        });
+        deployment.then(function(){
+          methods.getTemplate($el, options);
+        });
       },
       destroy: function(){
-        var $el = $(this);
+        const $el = $(this);
         $el.empty();
         $el.removeClass('dw-filter');
       },
       val: function($el){
-        if($el === null ){
-          $el = $(this);
-        }
-        var type = $el.data('type');
-
+        (typeof $el === 'undefined' || $el === null ) ? $el = $(this) : null;
+        const type = $el.data('type');
         // builds each modified object
         switch(type) {
           case 'checkbox':
@@ -34,28 +38,22 @@
     };
 
     // Private methods
-    var methods = {
+    let methods = {
       deployComponent: function($el, options){
         // convert the div into a dw-filter component
         $el.addClass('dw-filter');
-        // get filter template
-        methods.getTemplate($el, options);
       },
       getTemplate: function($el, options){
         $.get("./component/templates/dw-filter.html", function( result ) {
-          templateContent = result;
+          let templateContent = result;
           methods.setTemplate($el, templateContent, options);
         });
       },
       setTemplate : function($el, templateContent, options){
-        var titleVal = '';
-        var template;
+        let titleVal = '';
+        let template;
         if (typeof options !== 'undefined') {
-          if (typeof options.title === 'undefined') {
-            titleVal = '';
-          }else{
-            titleVal = options.title;
-          }
+          (typeof options.title === 'undefined') ? titleVal = '' : titleVal = options.title;
           template = _.template(templateContent);
           $el.html( template({titleVal: titleVal}) );
         }else{
@@ -70,9 +68,7 @@
           // show search input
           methods.showSearch($el, options);
           // set height
-          if(typeof options.height !== 'undefined'){
-            methods.setHeight($el, options);
-          }
+          (typeof options.height !== 'undefined') ? methods.setHeight($el, options) : null;
           // init events
           events.start($el, options);
         }
@@ -95,13 +91,14 @@
         $el.data({
           type: options.type
         });
-        var key = options.config.key_attr;
-        var value = options.config.value_attr;
+        const key = options.config.key_attr;
+        const value = options.config.value_attr;
 
         $.get("./component/templates/checkbox.html", function( result ) {
-          var template = _.template(result);
-          $.each(options.data, function(i, data){
-            var contentHtml = template({
+          let template = _.template(result);
+          // load component template
+          options['data'].forEach(data => {
+            let contentHtml = template({
               key: data[key],
               value: data[value]
             });
@@ -116,33 +113,32 @@
         $el.data({
           type: options.type
         });
-        var key = options.config.key_attr;
-        var name = options.config.name_attr;
-        var value = options.config.value_attr;
+        const key = options.config.key_attr;
+        const name = options.config.name_attr;
+        const value = options.config.value_attr;
 
         $.get("./component/templates/selectChain.html", function( result ) {
-          var template = _.template(result);
-          $.each(options.data, function(i, data){
-            var contentHtml = template({
+          let template = _.template(result);
+          options['data'].forEach(data => {
+            let contentHtml = template({
               key: data[key],
               name: data[name],
               value: data[value]
             });
             $el.find('.dw-options').append(contentHtml);
           });
+
           // events for selectChain
           events.selectChain($el, options);
         });
       },
       showSearch: function($el, options){
-        var $search = $el.find('.search input');
-        if( options.search == 'inner' || options.search == 'outer' ){
-          $search.toggleClass('hide');
-        }
+        let $search = $el.find('.search input');
+        ( options.search == 'inner' || options.search == 'outer' ) ? $search.toggleClass('hide') : null;
       },
       setHeight: function($el, options){
-        var $options = $el.find('.dw-options');
-        var heightVal = options.height;
+        let $options = $el.find('.dw-options');
+        let heightVal = options.height;
         if(heightVal == 'auto'){
           $options.css({
             height: 'auto'
@@ -154,21 +150,21 @@
         }
       },
       valCheckbox: function($el){
-        var result = {
+        let result = {
           search: '',
           data: []
         };
-        var $options = $el.find('.dw-options');
-        $.each($options.find('.dw-option') , function(i, opt){
-          var $opt = $(opt);
-          var $optInput = $opt.find('input');
-          if( $optInput.is(':checked') ){
-            // arm
-            result.data.push($opt.data('value'));
-          }
+        let $options = $el.find('.dw-options');
+        let $option = $options.find('.dw-option');
+        // options
+        $option.toArray().forEach(opt => {
+          const $opt = $(opt);
+          let $optInput = $opt.find('input');
+          ( $optInput.is(':checked') ) ? result.data.push($opt.data('value')) : null;
         });
+
         // outerSearch
-        var outerSearch = methods.getOuterSearch($el);
+        let outerSearch = methods.getOuterSearch($el);
         if(typeof outerSearch !== 'undefined'){
           result.search = outerSearch;
         }
@@ -178,17 +174,18 @@
         return result;
       },
       valSelectChain: function($el){
-        var result = {
+        let result = {
           search: '',
           data: []
         };
-        var $options = $el.find('.dw-options');
+        let $options = $el.find('.dw-options');
+        let $option = $options.find('.dw-option');
         // options
-        $.each($options.find('.dw-option') , function(i, opt){
-          var $opt = $(opt);
-          var $optInput = $opt.find('select');
+        $option.toArray().forEach(opt => {
+          const $opt = $(opt);
+          let $optInput = $opt.find('select');
 
-          var content = function(){
+          let content = function(){
             if($optInput.val() == 'undefined' || $optInput.val() == 'none'){
               return null;
             }else{
@@ -201,12 +198,9 @@
             content: content
           });
         });
-
         // outerSearch
-        var outerSearch = methods.getOuterSearch($el);
-        if(typeof outerSearch !== 'undefined'){
-          result.search = outerSearch;
-        }
+        let outerSearch = methods.getOuterSearch($el);
+        (typeof outerSearch !== 'undefined') ? result.search = outerSearch : null;
         // update $el data
         $el.data("result", result);
         this.passResult($el);
@@ -221,20 +215,17 @@
         });
       },
       getOuterSearch: function($el){
-        var dataSearch = $el.data('dataSearch');
+        let dataSearch = $el.data('dataSearch');
         return dataSearch;
       },
       hideOptions: function($el, data, options){
-        $.each($el.find('.dw-option') , function(i, opt){
-          var $opt = $(opt);
-          var temp = $opt.data('content');
+        let $option = $el.find('.dw-option').toArray();
+        $option.forEach(opt => {
+          const $opt = $(opt);
+          let temp = $opt.data('content');
           temp = temp.toLowerCase();
           data = data.toLowerCase();
-          if( temp.indexOf(data) != -1 ) {
-            $opt.show();
-          }else{
-            $opt.hide();
-          }
+          ( temp.indexOf(data) != -1 ) ? $opt.show() : $opt.hide();
         });
       },
       passResult: function($el){
@@ -249,9 +240,9 @@
         events.onSearch($el, options);
       },
       toggleContent: function($el, options){
-        var $header = $el.find('header');
-        var $content = $el.find('content');
-        var $icon = $el.find('.icon-toggle');
+        let $header = $el.find('header');
+        let $content = $el.find('content');
+        let $icon = $el.find('.icon-toggle');
         $header.on({
           click: function(){
             $content.slideToggle('fast', function(){
@@ -267,7 +258,7 @@
         });
       },
       onSearch: function($el, options){
-        var $search = $el.find('.search input');
+        let $search = $el.find('.search input');
         $search.on({
           keyup: function(event){
             var inputData = $search.val();
@@ -287,11 +278,7 @@
             $search.removeClass('glass');
           },
           focusout: function(event){
-            if($search.val().length > 0){
-              $search.removeClass('glass');
-            }else{
-              $search.addClass('glass');
-            }
+            ($search.val().length > 0) ? $search.removeClass('glass') : $search.addClass('glass');
           }
         });
       },
