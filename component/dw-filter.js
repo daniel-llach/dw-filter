@@ -143,8 +143,6 @@
       setHeight: function($el, options){
         var $options = $el.find('.dw-options');
         var heightVal = options.height;
-        console.log("heightVal: ", heightVal);
-        console.log("heightVal.indexOf('px'): ", heightVal.indexOf('px'));
         if(heightVal == 'auto'){
           $options.css({
             height: 'auto'
