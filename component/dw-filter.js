@@ -1,3 +1,7 @@
+var scripts = document.getElementsByTagName("script");
+var urlBase = scripts[scripts.length-1].src;
+urlBase = urlBase.replace('dw-filter.js', '');
+
 // dwFilter
 (function( $ ){
   "use strict";
@@ -44,7 +48,7 @@
         $el.addClass('dw-filter');
       },
       getTemplate: function($el, options){
-        $.get("./component/templates/dw-filter.html", function( result ) {
+        $.get(urlBase + "templates/dw-filter.html", function( result ) {
           let templateContent = result;
           methods.setTemplate($el, templateContent, options);
         });
@@ -94,7 +98,7 @@
         const key = options.config.key_attr;
         const value = options.config.value_attr;
 
-        $.get("./component/templates/checkbox.html", function( result ) {
+        $.get(urlBase + "templates/checkbox.html", function( result ) {
           let template = _.template(result);
           // load component template
           options['data'].forEach(data => {
@@ -117,7 +121,7 @@
         const name = options.config.name_attr;
         const value = options.config.value_attr;
 
-        $.get("./component/templates/selectChain.html", function( result ) {
+        $.get(urlBase + "templates/selectChain.html", function( result ) {
           let template = _.template(result);
           options['data'].forEach(data => {
             let contentHtml = template({
