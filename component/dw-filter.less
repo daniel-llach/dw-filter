@@ -311,13 +311,25 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
       .dw-option
       {
 
+        input[type="checkbox"]
+        {
+          margin: 0;
+          line-height: auto;
+          vertical-align: middle;
+        }
+
         label
         {
           position: relative;
-          font-size: 12px;
+          font-size: 12px !important;
+          font-weight: normal;
           color: #B4B1B1;
           bottom: -1px;
           font-family: 'Open sans';
+          display: -webkit-inline-box;
+          margin-bottom: 0;
+          line-height: auto;
+
 
           .noselect;
         }
