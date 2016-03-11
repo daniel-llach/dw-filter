@@ -1,0 +1,386 @@
+// color
+@azulOscuro: #286186;
+@azul2: #3d5e73;
+@blanco: #ffffff;
+@lineaImpar: #eef8f8;
+@lineaPar: #e4efef;
+
+// tipografia
+@font-face {
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: normal;
+/*src: url('../fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Open Sans';
+font-weight: 300;
+/*src: url('/fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Open Sans';
+font-weight: 700;
+/*src: url('/fonts/OpenSans.eot');*/
+src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+
+
+
+
+
+// redondeado
+.redondo (@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// degradación
+
+.degradacion (@direction:top, @color1:#fff, @color2:#000)
+{
+	background-color: @color1;
+	background-image: -moz-linear-gradient(@direction, @color1, @color2);
+	background-image: -ms-linear-gradient(@direction, @color1, @color2);
+	background-image: -o-linear-gradient(@direction, @color1, @color2);
+	background-image: -webkit-gradient(linear, center @direction, center bottom, from(@color1), to(@color2));
+	background-image: -webkit-linear-gradient(@direction, @color1, @color2);
+	background-image: linear-gradient(@direction, @color1, @color2);
+	/*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+
+}
+
+
+
+
+// eliminar estilos por defecto input, etc
+.no-estilo
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+// seteo animacion
+.animacion (@temp: 1s)
+{
+	-webkit-transition: all @temp ease-in-out;
+	-moz-transition: all @temp ease-in-out;
+	-o-transition: all @temp ease-in-out;
+	transition: all @temp ease-in-out;
+}
+
+.sombra(@sb)
+{
+	-moz-box-shadow: @sb;
+	-webkit-box-shadow: @sb;
+	box-shadow: @sb;
+}
+
+.brillo(@br: .2)
+{
+	filter: brightness(@br);
+	// Browser Specific
+	-webkit-filter: brightness(@br);
+	-moz-filter: brightness(@br);
+	-o-filter: brightness(@br);
+	-ms-filter: brightness(@br);
+}
+
+.blur(@bl: 5px)
+{
+	filter: blur(@bl);
+	// Browser Specific
+	-webkit-filter: blur(@bl);
+	-moz-filter: blur(@bl);
+	-o-filter: blur(@bl);
+	-ms-filter: blur(@bl);
+}
+
+.saturacion(@st: 50%)
+{
+	filter: saturate(@st);
+	// Browser Specific
+	-webkit-filter: saturate(@st);
+	-moz-filter: saturate(@st);
+	-o-filter: saturate(@st);
+	-ms-filter: saturate(@st);
+}
+
+.hue(@hu: 20deg)
+{
+	filter: hue-rotate(@hu);
+	// Browser Specific
+	-webkit-filter: hue-rotate(@hu);
+	-moz-filter: hue-rotate(@hu);
+	-o-filter: hue-rotate(@hu);
+	-ms-filter: hue-rotate(@hu);
+}
+
+.contraste(@cn: 150%)
+{
+	filter: contrast(@cn);
+	// Browser Specific
+	-webkit-filter: contrast(@cn);
+	-moz-filter: contrast(@cn);
+	-o-filter: contrast(@cn);
+	-ms-filter: contrast(@cn);
+}
+
+.invertir(@in: 100%)
+{
+	filter: invert(@in);
+	// Browser Specific
+	-webkit-filter: invert(@in);
+	-moz-filter: invert(@in);
+	-o-filter: invert(@in);
+	-ms-filter: invert(@in);
+}
+
+.grayscale(@gr: 100%)
+{
+	filter: grayscale(@gr);
+	// Browser Specific
+	-webkit-filter: grayscale(@gr);
+	-moz-filter: grayscale(@gr);
+	-o-filter: grayscale(@gr);
+	-ms-filter: grayscale(@gr);
+}
+
+.sepia(@sp: 100%)
+{
+	filter: sepia(@sp);
+	// Browser Specific
+	-webkit-filter: sepia(@sp);
+	-moz-filter: sepia(@sp);
+	-o-filter: sepia(@sp);
+	-ms-filter: sepia(@sp);
+}
+
+
+.izq
+{
+	position: relative;
+	float: left;
+}
+
+.cen
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.der
+{
+	float: right;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.noApparence
+{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+
+//////////////////////////////////////////////////////////
+//////////////////////  INICIO CSS ///////////////////////
+//////////////////////////////////////////////////////////
+
+
+.dw-filter
+{
+  width: 100%;
+  height: auto;
+  font-family: 'Open sans';
+  background-color: #f6f3f3;
+  padding: 10px 10px 3px;
+  border-bottom: 1px solid #bfbfbf;
+
+  header
+  {
+    position: relative;
+    cursor: pointer;
+    height: 26px;
+
+    .left{
+      text-transform: uppercase;
+      color: #3778a5;
+      padding: 0 0 7px 0;
+      font-size: 15px;
+      font-weight: 400;
+      .noselect;
+    }
+
+    .right
+    {
+      position: absolute;
+      top: 2px;
+      right: -8px;
+      font-size: 21px;
+      color: #3778a5;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      text-align: right;
+
+      .icon-toggle
+      {
+        width: 18px;
+        height: 18px;
+        background-size: 18px !important;
+        background-position: -2px 2px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat;
+
+        &.open
+        {
+          background-image: url(svg/open.svg) !important;
+        }
+
+        &.close
+        {
+          background-image: url(svg/close.svg) !important;
+        }
+      }
+    }
+
+  }
+
+  content
+  {
+    box-sizing: border-box;
+    padding-bottom: 4px;
+    display: block;
+
+    .search
+    {
+      padding: 0 19px 5px 10px;
+      font-size: inherit;
+      line-height: normal;
+
+      input
+      {
+        width: 96%;
+        border-style: none;
+        height: 17px;
+        padding: 3px 4%;
+        color: #9B9797;
+        font-size: 12px;
+
+        &.glass
+        {
+          background-size: 14px !important;
+          background-position: center 4px;
+          background-image: url(svg/glass.svg) !important;
+          background-repeat: no-repeat;
+        }
+      }
+
+
+    }
+    .dw-options
+    {
+      margin: 0 13px 10px 11px;
+      height: 132px;
+      overflow-y: auto;
+
+      .dw-option
+      {
+
+        input[type="checkbox"]
+        {
+          margin: 0;
+          line-height: normal;
+          vertical-align: middle;
+        }
+
+        label
+        {
+          position: relative;
+          font-size: 12px !important;
+          font-weight: normal;
+          color: #B4B1B1;
+          bottom: -1px;
+          font-family: 'Open sans';
+          display: -webkit-inline-box;
+          margin-bottom: 0;
+          line-height: normal;
+
+
+          .noselect;
+        }
+
+        select
+        {
+          border-color: #bfbfbf;
+          width: 100%;
+          padding: 4px;
+          margin-bottom: 5px;
+          background: url('svg/down.svg') no-repeat 97% center !important;
+          background-size: 11px !important;
+          color: #878787;
+          font-size: 12px;
+          font-family: 'Open sans';
+          line-height: normal;
+          height: 28px;
+
+          .noApparence;
+
+          .unselected
+          {
+            color: red;
+          }
+        }
+
+
+
+        &.selectChain
+        {
+          &:first-child
+          {
+            margin-top: 8px;
+          }
+        }
+      }
+
+      //
+      // input[type=checkbox] {
+      //   background-color: #f6f3f3;
+      //   display: inline-block;
+      //   visibility: visible;
+      // }
+    }
+  }
+
+  .hide
+  {
+    display: none !important;
+  }
+
+}
