@@ -3,6 +3,8 @@ A filter component for **darwinEd©** app of **Foris**.
 
 <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/dw-filter.png?raw=true">
 
+* live example: http://daniel-llach.github.io/dw-filter/
+
 # Index:
 
 <a href="#1--install">1.- Install</a> </br>
