@@ -193,8 +193,7 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
-  user-select: none;           /* non-prefixed version, currently
-                                  not supported by any browser */
+  user-select: none;           /* non-prefixed version, currently                            not supported by any browser */
 }
 
 .noApparence
@@ -210,6 +209,14 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
 //////////////////////  INICIO CSS ///////////////////////
 //////////////////////////////////////////////////////////
 
+a, input, textarea, button
+{
+    text-decoration: none;
+    &:focus
+    {
+      outline:0;
+    }
+}
 
 .dw-filter
 {
@@ -365,6 +372,48 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
           &:first-child
           {
             margin-top: 8px;
+          }
+        }
+
+        &.multiselect
+        {
+          .selectedItems
+          {
+            width: 100%;
+            height: 150px;
+            background-color: #FEFCFC;
+            .redondo(5px 5px 0 0);
+          }
+
+          .itemSelector
+          {
+            width: 100%;
+            height: 30px;
+
+            #choose
+            {
+              position: relative;
+              float: left;
+              width: calc(~"100% - 30px");
+              height: 100%;
+              background: #fff;
+            }
+
+            .add
+            {
+              position: relative;
+              float: left;
+              width: 30px;
+              height: 100%;
+
+              border: none;
+              background-color: #3778A5;
+              color: #fff;
+              font-size: 18px;
+              font-weight: 100;
+
+              .noApparence;
+            }
           }
         }
       }

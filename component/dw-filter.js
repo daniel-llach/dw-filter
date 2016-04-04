@@ -1,9 +1,10 @@
-var scripts = document.getElementsByTagName("script");
-var urlBase = scripts[scripts.length-1].src;
-urlBase = urlBase.replace('dw-filter.js', '');
 
 // dwFilter
 (function( $ ){
+  var scripts = document.getElementsByTagName("script");
+  var urlBase = scripts[scripts.length-1].src;
+  urlBase = urlBase.replace('dw-filter.js', '');
+
   "use strict";
 
     // Public methods
@@ -80,6 +81,9 @@ urlBase = urlBase.replace('dw-filter.js', '');
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
+          case 'multiselect':
+            methods.multiselectTemplate($el, options);
+            break;
           case 'checkbox':
             methods.checkboxTemplate($el, options);
             break;
@@ -92,6 +96,7 @@ urlBase = urlBase.replace('dw-filter.js', '');
         }
       },
       checkboxTemplate: function($el, options){
+        console.log("$el: ", $el);
         $el.data({
           type: options.type
         });
@@ -109,6 +114,8 @@ urlBase = urlBase.replace('dw-filter.js', '');
             $el.find('.dw-options').append(contentHtml);
           });
 
+          debugger;
+
           // events for checkboxes
           events.checkboxes($el);
         });
@@ -117,6 +124,7 @@ urlBase = urlBase.replace('dw-filter.js', '');
         $el.data({
           type: options.type
         });
+
         const key = options.config.key_attr;
         const name = options.config.name_attr;
         const value = options.config.value_attr;
@@ -134,6 +142,31 @@ urlBase = urlBase.replace('dw-filter.js', '');
 
           // events for selectChain
           events.selectChain($el, options);
+        });
+      },
+      multiselectTemplate: function($el, options){
+        $el.data({
+          type: options.type
+        });
+
+        // data key, value
+        const placeholder = options.config.key_value_placeholder;
+        const data = options.config.key_data_attr;
+
+        $.get(urlBase + "templates/multiselect.html", function( result ){
+          let template = _.template(result);
+          let contentHtml = template();
+          // content structure
+          $el.find('.dw-options').append(contentHtml);
+
+          // init dw-typeahead
+          $('#choose').dwTypeahead({
+            placeholder: options.data[0][placeholder],
+            data: options.data[0][data]
+          })
+
+          // events for multiselect
+          events.multiselect($el, options);
         });
       },
       showSearch: function($el, options){
@@ -303,6 +336,9 @@ urlBase = urlBase.replace('dw-filter.js', '');
             api.val($el);
           }
         });
+      },
+      multiselect: function($el){
+        console.log("multiselect events");
       }
     };
 
