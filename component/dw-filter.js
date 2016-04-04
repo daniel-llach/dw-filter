@@ -114,8 +114,6 @@
             $el.find('.dw-options').append(contentHtml);
           });
 
-          debugger;
-
           // events for checkboxes
           events.checkboxes($el);
         });
