@@ -336,7 +336,18 @@
         });
       },
       multiselect: function($el){
-        console.log("multiselect events");
+        // getChoose
+        let $choose = $el.find('#choose');
+        let $add = $el.find('.add');
+
+        $add.on({
+          click: function(){
+            let chooseVal = $choose.data('result')
+            console.log("chooseVal: ", chooseVal[0]);
+            // clean typeahead
+            $choose.dwTypeahead('empty');
+          }
+        })
       }
     };
 
