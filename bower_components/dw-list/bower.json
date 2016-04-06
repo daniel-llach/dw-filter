@@ -1,0 +1,33 @@
+{
+  "name": "dw-list",
+  "authors": [
+    "daniel-llach <daniel.llach@gmail.com>"
+  ],
+  "description": "A list component for DarwinEd",
+  "main": [
+    "components/dw-list.js",
+    "components/dw-list.css"
+  ],
+  "moduleType": "es6",
+  "keywords": [
+    "list",
+    "dw",
+    "darwined",
+    "groups"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "underscore": "^1.8.3",
+    "jquery-ui": "^1.11.4",
+    "Sortable": "^1.4.2"
+  }
+}

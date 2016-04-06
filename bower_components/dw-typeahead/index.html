@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>dw-typeahead</title>
+
+    <!-- context style -->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <!-- wd-select dependencies -->
+    <script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="./bower_components/underscore/underscore-min.js" type="text/javascript"></script>
+    <script src="./component/dw-typeahead.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./component/dw-typeahead.css">
+
+</head>
+<body>
+  <div id="contetendorSample" class="contenedorFiltros" style="height:200vh;overflow-y:scroll">
+    <div id="sample1" class="demoDiv" style="margin-top: 600px"></div>
+  </div>
+
+  <script type="text/javascript">
+    // checkbox
+    $('#sample1').dwTypeahead({
+      placeholder: 'Select your animal',
+      data: [
+        {
+          id: 1,
+          primary: 'Cat',
+          secundary: 'Gray',
+          selected: false,
+          group: ['feline']
+        },
+        {
+          id: 2,
+          primary: 'Dog',
+          secundary: 'White',
+          selected: false,
+          group: ['canine']
+        },
+        {
+          id: 3,
+          primary: 'Cheetah',
+          secundary: 'yellow',
+          selected: false,
+          group: ['canine']
+        },
+        {
+          id: 4,
+          primary: 'Fox',
+          secundary: 'Brown',
+          selected: false,
+          group: ['canine']
+        },
+        {
+          id: 5,
+          primary: 'Culpeo',
+          secundary: 'Light Brown',
+          selected: true,
+          group: ['canine']
+        },
+        {
+          id: 6,
+          primary: 'Jaguar',
+          secundary: 'Yellow',
+          selected: false,
+          group: ['feline']
+        },
+        {
+          id: 7,
+          primary: 'Lion',
+          secundary: 'orange',
+          selected: false,
+          group: ['feline']
+        },
+        {
+          id: 8,
+          primary: 'African Wild Dog',
+          secundary: 'marbled',
+          selected: false,
+          group: ['canine']
+        },
+        {
+          id: 9,
+          primary: 'Yacare Caiman',
+          secundary: 'green',
+          selected: false,
+          group: ['reptile']
+        },
+        {
+          id: 10,
+          primary: 'Leopard Gecko',
+          secundary: 'light brown',
+          selected: false,
+          group: ['reptile']
+        }
+      ]
+    })
+
+    // listeners
+    var smpl1 = $('#sample1');
+    smpl1.on({
+      change: function(event){
+        var result = smpl1.data('result');
+        console.log("sample1 data: ", result);
+      }
+    });
+  </script>

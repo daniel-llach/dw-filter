@@ -1,0 +1,31 @@
+{
+  "name": "dw-typeahead",
+  "authors": [
+    "daniel-llach <daniel.llach@gmail.com>"
+  ],
+  "description": "A typeahead component for DarwinEd",
+  "main": [
+    "components/dw-typeahead.js",
+    "components/dw-typeahead.css"
+  ],
+  "moduleType": "amd",
+  "keywords": [
+    "typeahead",
+    "dw",
+    "darwined",
+    "groups"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "underscore": "^1.8.3"
+  }
+}
