@@ -3,6 +3,8 @@ A filter component for **darwinEd©** app of **Foris**.
 
 <img src="https://github.com/daniel-llach/dw-filter/blob/master/img/dw-filter.png?raw=true">
 
+* live example: http://daniel-llach.github.io/dw-filter/
+
 # Index:
 
 <a href="#1--install">1.- Install</a> </br>
@@ -55,22 +57,27 @@ The API accepts the next configurations:
 
 An example:
 ```javascript
-$('#sample1').dwSelect({
+$('#id').dwFilter({
+  title: 'Origen',
+  type: 'checkbox',
+  search: true,
+  config: {
+    key_attr: 'id',
+    value_attr: 'content'
+  },
   data: [
     {
-      id: 1,
-      primary: 'Cat',
-      secundary: 'Gray',
-      selected: false,
-      group: ['feline']
+      id: 4522,
+      content: 'Real'
     },
     {
-      id: 2,
-      primary: 'Dog',
-      secundary: 'White',
-      selected: false,
-      group: ['canine']
+      id: 5645,
+      content: 'Proyección 1'
     },
+    {
+      id: 2378,
+      content: 'Proyección 2'
+    }
   ]
 });
 ```

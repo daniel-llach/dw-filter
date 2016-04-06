@@ -1,10 +1,13 @@
-var scripts = document.getElementsByTagName("script");
-var urlBase = scripts[scripts.length-1].src;
-urlBase = urlBase.replace('dw-filter.js', '');
 
 // dwFilter
 (function( $ ){
+  var scripts = document.getElementsByTagName("script");
+  var urlBase = scripts[scripts.length-1].src;
+  urlBase = urlBase.replace('dw-filter.js', '');
+
   "use strict";
+
+  let localstore;
 
     // Public methods
     let api = {
@@ -33,6 +36,8 @@ urlBase = urlBase.replace('dw-filter.js', '');
             return methods.valCheckbox($el);
           case 'selectChain':
             return methods.valSelectChain($el);
+          case 'multiselect':
+            return methods.valMultiselect($el);
           case undefined:
             return 'No type defined in this $el data';
           default:
@@ -80,6 +85,9 @@ urlBase = urlBase.replace('dw-filter.js', '');
       },
       setOptionTemplate: function($el, options){
         switch(options.type) {
+          case 'multiselect':
+            methods.multiselectTemplate($el, options);
+            break;
           case 'checkbox':
             methods.checkboxTemplate($el, options);
             break;
@@ -117,6 +125,7 @@ urlBase = urlBase.replace('dw-filter.js', '');
         $el.data({
           type: options.type
         });
+
         const key = options.config.key_attr;
         const name = options.config.name_attr;
         const value = options.config.value_attr;
@@ -134,6 +143,34 @@ urlBase = urlBase.replace('dw-filter.js', '');
 
           // events for selectChain
           events.selectChain($el, options);
+        });
+      },
+      multiselectTemplate: function($el, options){
+        $el.data({
+          type: options.type
+        });
+
+        // data key, value
+        const placeholder = options.config.key_value_placeholder;
+        const data = options.config.key_data_attr;
+
+        $.get(urlBase + "templates/multiselect.html", function( result ){
+          let template = _.template(result);
+          let contentHtml = template();
+          // content structure
+          $el.find('.dw-options').append(contentHtml);
+
+          // init dw-typeahead
+          $('#choose').dwTypeahead({
+            placeholder: options.data[0][placeholder],
+            data: options.data[0][data]
+          })
+
+          // localstore
+          localstore = options.data[0][data];
+
+          // events for multiselect
+          events.multiselect($el, options);
         });
       },
       showSearch: function($el, options){
@@ -172,6 +209,24 @@ urlBase = urlBase.replace('dw-filter.js', '');
         if(typeof outerSearch !== 'undefined'){
           result.search = outerSearch;
         }
+        // update $el data
+        $el.data("result", result);
+        methods.passResult($el);
+        return result;
+      },
+      valMultiselect: function($el){
+        let result = {
+          search: '',
+          data: []
+        };
+        let $options = $el.find('.dw-options');
+        let $option = $options.find('.dw-list > content > .items > .item');
+
+        $option.toArray().forEach(opt => {
+          const $opt = $(opt);
+          result.data.push($opt.data('id'));
+        });
+
         // update $el data
         $el.data("result", result);
         methods.passResult($el);
@@ -233,7 +288,7 @@ urlBase = urlBase.replace('dw-filter.js', '');
         });
       },
       passResult: function($el){
-        $el.trigger('change');
+        $el.trigger('changeFilter');
       }
     };
 
@@ -303,6 +358,48 @@ urlBase = urlBase.replace('dw-filter.js', '');
             api.val($el);
           }
         });
+      },
+      multiselect: function($el){
+        // getChoose
+        let $choose = $el.find('#choose');
+        let $add = $el.find('.add');
+
+        // init dw-list
+        let $selected = $el.find('.selectedItems');
+        $selected.dwList({
+          name: 'selectedItems',
+          type: 'order', // priority, order, change
+          sortable: true,
+          data: []
+        })
+
+        $add.on({
+          click: function(){
+            let chooseVal = $choose.data('result')
+            // clean typeahead
+            $choose.dwTypeahead('empty');
+            // get item data from localstore
+            let itemData = _.where(localstore, {id: chooseVal[0]});
+            // add item to dw-list
+            $selected.dwList({
+              add:[
+                {
+                  id: itemData[0].id,
+                  primary: itemData[0].primary
+                }
+              ]
+            });
+          }
+        })
+        // listen change on dw-list
+        $selected.on({
+          change: function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            api.val($el);
+          }
+        });
+
       }
     };
 
