@@ -7,6 +7,8 @@
 
   "use strict";
 
+  let localstore;
+
     // Public methods
     let api = {
       init : function(options) {
@@ -34,6 +36,8 @@
             return methods.valCheckbox($el);
           case 'selectChain':
             return methods.valSelectChain($el);
+          case 'multiselect':
+            return methods.valMultiselect($el);
           case undefined:
             return 'No type defined in this $el data';
           default:
@@ -96,7 +100,6 @@
         }
       },
       checkboxTemplate: function($el, options){
-        console.log("$el: ", $el);
         $el.data({
           type: options.type
         });
@@ -163,6 +166,9 @@
             data: options.data[0][data]
           })
 
+          // localstore
+          localstore = options.data[0][data];
+
           // events for multiselect
           events.multiselect($el, options);
         });
@@ -203,6 +209,24 @@
         if(typeof outerSearch !== 'undefined'){
           result.search = outerSearch;
         }
+        // update $el data
+        $el.data("result", result);
+        methods.passResult($el);
+        return result;
+      },
+      valMultiselect: function($el){
+        let result = {
+          search: '',
+          data: []
+        };
+        let $options = $el.find('.dw-options');
+        let $option = $options.find('.dw-list > content > .items > .item');
+
+        $option.toArray().forEach(opt => {
+          const $opt = $(opt);
+          result.data.push($opt.data('id'));
+        });
+
         // update $el data
         $el.data("result", result);
         methods.passResult($el);
@@ -264,7 +288,7 @@
         });
       },
       passResult: function($el){
-        $el.trigger('change');
+        $el.trigger('changeFilter');
       }
     };
 
@@ -340,14 +364,42 @@
         let $choose = $el.find('#choose');
         let $add = $el.find('.add');
 
+        // init dw-list
+        let $selected = $el.find('.selectedItems');
+        $selected.dwList({
+          name: 'selectedItems',
+          type: 'order', // priority, order, change
+          sortable: true,
+          data: []
+        })
+
         $add.on({
           click: function(){
             let chooseVal = $choose.data('result')
-            console.log("chooseVal: ", chooseVal[0]);
             // clean typeahead
             $choose.dwTypeahead('empty');
+            // get item data from localstore
+            let itemData = _.where(localstore, {id: chooseVal[0]});
+            // add item to dw-list
+            $selected.dwList({
+              add:[
+                {
+                  id: itemData[0].id,
+                  primary: itemData[0].primary
+                }
+              ]
+            });
           }
         })
+        // listen change on dw-list
+        $selected.on({
+          change: function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            api.val($el);
+          }
+        });
+
       }
     };
 
