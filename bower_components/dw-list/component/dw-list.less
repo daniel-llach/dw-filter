@@ -5,28 +5,8 @@
 @lineaImpar: #eef8f8;
 @lineaPar: #e4efef;
 
-// tipografia
-@font-face {
-font-family: 'Open Sans';
-font-style: normal;
-font-weight: normal;
-/*src: url('../fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Regular.ttf') format('truetype');
-}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800); //font-family: 'Open Sans', sans-serif;
 
-@font-face {
-font-family: 'Open Sans';
-font-weight: 300;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Light.ttf') format('truetype');
-}
-
-@font-face {
-font-family: 'Open Sans';
-font-weight: 700;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') format('truetype');
-}
 
 
 // redondeado
@@ -219,7 +199,7 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
 {
   width: 100%;
   height: auto;
-  font-family: 'Open sans';
+  font-family: 'Open Sans', sans-serif;
   background-color: #f6f3f3;
 
   header
@@ -332,7 +312,6 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
             box-sizing: border-box;
             list-style: none;
             margin: 3px 5px;
-            background: #fff;
             box-sizing: border-box;
             cursor: default;
             position: relative;
@@ -454,7 +433,6 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
             padding: 4px 10px;
             float: left;
             width: calc(~'100% - 10px');
-            height: 52px;
             box-sizing: border-box;
             list-style: none;
             margin: 2px 5px;
@@ -471,6 +449,177 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   .hide
   {
     display: none !important;
+  }
+
+
+
+}
+
+// naked style
+.naked
+{
+  .single
+  {
+    height: 30px;
+    color: #8A8787 !important;
+    font-size: 12px !important;
+    border: 1px solid #BFBFBF;
+    background: transparent;
+
+    .left
+    {
+      margin-top: 1px !important;
+      width: 10px !important;
+
+      span
+      {
+        font-weight: 100 !important;
+        font-size: 10px !important;
+      }
+    }
+
+    .right
+    {
+      margin-top: -2px;
+      height: 35px;
+
+      span
+      {
+        margin-top: 2px;
+        font-weight: 400;
+      }
+    }
+
+
+    .indicator
+    {
+      height: 30px !important;
+      color: #A0E8BB !important;
+    }
+  }
+
+
+  .double
+  {
+    height: 40px;
+    color: #8A8787 !important;
+    font-size: 12px !important;
+    border: 1px solid #BFBFBF;
+    background: transparent;
+
+    .left
+    {
+      margin-top: 1px !important;
+      width: 10px !important;
+
+      span
+      {
+        font-weight: 100 !important;
+        font-size: 10px !important;
+      }
+    }
+
+    .right
+    {
+      margin-top: -2px;
+      height: 35px;
+
+      span
+      {
+        font-weight: 400;
+      }
+
+      .primary
+      {
+        margin-top: -2px;
+      }
+
+      .secondary
+      {
+        margin-top: -7px;
+
+      }
+    }
+
+
+    .indicator
+    {
+      height: 40px !important;
+      color: #A0E8BB !important;
+    }
+  }
+
+}
+
+// naked style
+.light
+{
+  .single
+  {
+    height: 40px !important;
+    background: #fff;
+
+    .left
+    {
+      margin-top: 6px !important;
+
+      span
+      {
+
+      }
+    }
+
+    .right
+    {
+      margin-top: 4px;
+
+
+      span
+      {
+
+      }
+    }
+
+
+    .indicator
+    {
+      height: 40px !important;
+      color: #A0E8BB !important;
+    }
+  }
+
+
+  .double
+  {
+    height: 53px !important;
+    background: #fff;
+
+    .left
+    {
+
+
+      span
+      {
+
+      }
+    }
+
+    .right
+    {
+
+
+      span
+      {
+
+      }
+    }
+
+
+    .indicator
+    {
+      height: 53px !important;
+      color: #A0E8BB !important;
+    }
   }
 
 }
