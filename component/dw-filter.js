@@ -160,18 +160,21 @@
           // content structure
           $el.find('.dw-options').append(contentHtml);
 
-          // init dw-typeahead
-          $('#choose').dwTypeahead({
-            placeholder: options.data[0][placeholder],
-            data: options.data[0][data]
-          })
-
           // localstore
           localstore = options.data[0][data];
+
+          // init dw-typeahead
+          methods.initDwTypeahead(options.data[0][placeholder]);
 
           // events for multiselect
           events.multiselect($el, options);
         });
+      },
+      initDwTypeahead: function(placeholder){
+        $('#choose').dwTypeahead({
+          placeholder: placeholder,
+          data: localstore
+        })
       },
       showSearch: function($el, options){
         let $search = $el.find('.search input');
@@ -369,6 +372,7 @@
         $selected.dwList({
           name: 'selectedItems',
           type: 'order', // priority, order, change
+          style: 'naked',
           sortable: true,
           data: []
         })
@@ -376,8 +380,9 @@
         $add.on({
           click: function(){
             let chooseVal = $choose.data('result')
-            // clean typeahead
+            // clean and restart dw-typeahead
             $choose.dwTypeahead('empty');
+            $choose.dwTypeahead('restart');
             // get item data from localstore
             let itemData = _.where(localstore, {id: chooseVal[0]});
             // add item to dw-list
@@ -388,17 +393,46 @@
                   primary: itemData[0].primary
                 }
               ]
-            });
+            })
+
+            console.log("remove: ", $selected.find('.remove'));
+
+            //remove item from dw-typeahead
+            $el.find('.dw-typeahead .option[data-id="' + itemData[0].id + '"]').remove()
+
+
+
+
           }
         })
-        // listen change on dw-list
+
+
+        // listen change and item remove on dw-list
         $selected.on({
           change: function(event){
             event.preventDefault();
             event.stopPropagation();
             api.val($el);
+
+          },
+          delete: function(event, item){
+            console.log("item remove: ", item);
+            // get data item by id from localstore
+            let itemData = _.where(localstore, {id: item});
+            $('#choose').dwTypeahead({
+              add:[
+                {
+                  id: itemData[0].id,
+                  primary: itemData[0].primary,
+                  secundary: itemData[0].secundary,
+                  selected: itemData[0].selected,
+                  group: itemData[0].group
+                }
+              ]
+            })
           }
         });
+
 
       }
     };
