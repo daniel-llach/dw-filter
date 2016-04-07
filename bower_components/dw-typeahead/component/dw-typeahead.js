@@ -388,7 +388,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         },
         focus: function(event){
           // $search.removeClass('glass');
-          $el.find('content').css('display','block');
+
           $options.removeClass('hide');
           methods.setPosition($el);
 
@@ -399,8 +399,6 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         },
         focusout: function(event){
           api.restart($el, false);
-          $el.find('content').css('display','none');
-
         }
       });
     },
