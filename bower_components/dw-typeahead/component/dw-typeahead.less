@@ -5,31 +5,7 @@
 @lineaImpar: #eef8f8;
 @lineaPar: #e4efef;
 
-// tipografia
-@font-face {
-font-family: 'Open Sans';
-font-style: normal;
-font-weight: normal;
-/*src: url('../fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Regular.ttf') format('truetype');
-}
-
-@font-face {
-font-family: 'Open Sans';
-font-weight: 300;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Light.ttf') format('truetype');
-}
-
-@font-face {
-font-family: 'Open Sans';
-font-weight: 700;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') format('truetype');
-}
-
-
-
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800); //font-family: 'Open Sans', sans-serif;
 
 
 
@@ -215,7 +191,7 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
 {
   width: 100%;
   height: auto;
-  font-family: 'Open sans';
+  font-family: 'Open Sans', sans-serif;
   background-color: #f6f3f3;
 
   header
@@ -283,8 +259,8 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
 
   content
   {
+    display: none;
     box-sizing: border-box;
-    display: block;
     position: fixed;
     z-index: 99;
 
@@ -377,6 +353,15 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   .hide
   {
     display: none !important;
+  }
+
+  .shadowDown
+  {
+    box-shadow: 0px 10px 5px -1px rgba(0,0,0,0.32);
+  }
+  .shadowUp
+  {
+    box-shadow: 0px -10px 5px -1px rgba(0,0,0,0.32);
   }
 
 }

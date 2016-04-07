@@ -28,7 +28,8 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       (typeof $el === 'undefined' || $el === null ) ? $el = $(this) : null;
       methods.getVal($el);
     },
-    restart: function($el){
+    restart: function($el, hard){
+      (typeof $el === 'undefined' || $el === null ) ? $el = $(this) : null;
       // previene cuando no hay input
       let $groups = $el.find('.options .group');
       let $groupsContent = $el.find('.options .group-content');
@@ -41,7 +42,10 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
 
       // deselect
       $options.removeClass('selected')
-      $el.data('result','')
+      if(hard){
+        $el.data('result','')
+      }else{
+      }
 
     },
     empty: function($el){
@@ -75,9 +79,12 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
     setTemplate : function($el, templateContent, options){
 
       let template = _.template(templateContent);
-      $el.html( template({
-        'placeholder': options.placeholder
-      }) );
+      // paint component structure if is not an add
+      if(!options.add){
+        $el.html( template({
+          'placeholder': options.placeholder
+        }) );
+      }
 
       if (typeof options !== 'undefined') {
         methods.optionTemplate($el, options)
@@ -86,23 +93,29 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
     },
     optionTemplate: function($el, options){
 
-      let data = options.data[0];
+      let optionsData = (options.add) ? options['add'] : options.data;
+
+      let data = optionsData[0];
 
       // If has groups, paint groups containers
       if( data.hasOwnProperty('group') ){
         // define groups
-        let groups =  _.chain(options.data).flatten().pluck('group').flatten().unique().value().sort();
+        let groups =  _.chain(optionsData).flatten().pluck('group').flatten().unique().value().sort();
 
         // paint groups containers
-        _.each(groups, function(group){
-          $el.find('content > .options').append('<div class="group" id="' + group + '"><div class="title"><span class="name">' + group + '</span><span class="open"></span></div></div><div class="group-content ' + group + '"></div>')
-        })
+        if(!options.add){
+          _.each(groups, function(group){
+            $el.find('content > .options').append('<div class="group" id="' + group + '"><div class="title"><span class="name">' + group + '</span><span class="open"></span></div></div><div class="group-content ' + group + '"></div>')
+          })
+        }
 
         // put options into its group
         $.get(urlBase + "templates/options.html", function( result ) {
             let template = _.template(result);
 
-            let data = _.sortBy(options['data'], 'primary');
+
+
+            let data = _.sortBy(optionsData, 'primary');
 
             // options each
             data.forEach(data => {
@@ -127,10 +140,10 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         $.get(urlBase + "templates/options.html", function( result ) {
             let template = _.template(result);
 
-            let data = _.sortBy(options['data'], 'primary');
+            let data = _.sortBy(optionsData, 'primary');
 
             // options each
-            options['data'].forEach(data => {
+            optionsData.forEach(data => {
               let contentHtml = template({
                 id: data['id'],
                 primary: data['primary'],
@@ -161,17 +174,22 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       // vertical
       if(windowHeight - ( contentTop + contentHeight ) < 0 ){
         $el.find('content').css({
-          top: contentTop - contentHeight + - headerHeight + 'px',
+          top: contentTop - contentHeight + - headerHeight + 'px'
         })
+        .addClass('shadowUp')
+        .removeClass('shadowDown')
       }else{
         $el.find('content').css({
-          top: contentTop + 'px',
+          top: contentTop + 'px'
         })
+        .addClass('shadowDown')
+        .removeClass('shadowUp')
       }
       // horizontal
       $el.find('content').css({
         width: contentWidth + 'px',
         left: contentLeft + 'px'
+
       })
     },
     previousParentsScrollTop: function($el){
@@ -342,6 +360,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       events.clickOption($el, options);
       events.clickOut($el, options);
       events.updatePosition($el);
+      api.restart($el, false);
     },
     initOptions: function($el, options){
       let $option = $el.find('content > .options > .option');
@@ -369,7 +388,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         },
         focus: function(event){
           // $search.removeClass('glass');
-
+          $el.find('content').css('display','block');
           $options.removeClass('hide');
           methods.setPosition($el);
 
@@ -378,10 +397,11 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
           // show/hide clear icon
           ($search.val().length > 0) ? $clear.removeClass('hide') : $clear.addClass('hide');
         },
-        // focusout: function(event){
-        //   // ($search.val().length > 0) ? $search.removeClass('glass') : $search.addClass('glass');
-        //   $options.addClass('hide');
-        // }
+        focusout: function(event){
+          api.restart($el, false);
+          $el.find('content').css('display','none');
+
+        }
       });
     },
     clearSearch: function($el, options){
@@ -395,7 +415,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
           ($search.val().length > 0) ? $search.removeClass('glass') : $search.addClass('glass');
 
           // restart contents
-          api.restart($el);
+          api.restart($el, true);
         }
       })
     },
@@ -418,6 +438,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       })
     },
     clickOut: function($el, options){
+      let $content = $el.find('content');
       let $options = $el.find('content > .options');
       let $clear = $el.find('.clear');
       $(document).mouseup(function (e)
@@ -427,6 +448,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
           {
               $options.addClass('hide');
               $clear.addClass('hide')
+              $content.removeClass('shadowUp').removeClass('shadowDown')
           }
       });
     },
