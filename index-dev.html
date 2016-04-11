@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>dw-filter</title>
+
+    <!-- context style -->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <!-- dw-filter dependencies -->
+    <script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="./bower_components/underscore/underscore-min.js" type="text/javascript"></script>
+    <script src="./component/dw-filter.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./component/dw-filter.css">
+
+    <!-- dw-typeahead dependencies -->
+    <script src="http://localhost/~danielllach/dw-components/dw-typeahead/component/dw-typeahead.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://localhost/~danielllach/dw-components/dw-typeahead/component/dw-typeahead.css">
+
+    <!-- dw-list dependencies -->
+    <script src="http://localhost/~danielllach/dw-components/dw-list/component/dw-list.js" type="text/javascript"></script>
+    <script src="./bower_components/Sortable/Sortable.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://localhost/~danielllach/dw-components/dw-list/component/dw-list.css">
+
+</head>
+<body>
+  <div id="contetendorSample" class="contenedorFiltros">
+    <div id="sample1" class="demoDiv"></div>
+    <div id="sample4" class="demoDiv"></div>
+    <div id="sample2" class="demoDiv"></div>
+    <div id="sample3" class="demoDiv"></div>
+  </div>
+
+  <script type="text/javascript">
+    // selectChain
+    $('#sample1').dwFilter({
+      title: 'Title1',
+      type:'selectChain',
+      search: false,
+      height: 'auto',
+      config: {
+        key_attr: 'id',
+        name_attr: 'name',
+        value_attr: 'content',
+        options_key_attr: 'id',
+        options_value_attr: 'content',
+        options_active_attr: 'selected'
+      },
+      data: [
+        {
+          id: 1555,
+          name: 'From',
+          content: [
+            {
+              id: 4565,
+              content: '2016 - 1 semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2016 - 2 Semester',
+              selected: true
+            },
+            {
+              id: 1212,
+              content: '2017 - 1 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 2 Semester',
+              selected: false
+            }
+          ]
+        },
+        {
+          id: 3434,
+          name: 'To',
+          content: [
+            {
+              id: 4565,
+              content: '2016 - 1 semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2016 - 2 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 1 Semester',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: '2017 - 2 Semester',
+              selected: true
+            }
+          ]
+        }
+      ]
+
+    });
+    // checkbox
+    $('#sample2').dwFilter({
+      title: 'Title2',
+      type: 'checkbox',
+      search: 'inner',
+      config: {
+        key_attr: 'id',
+        value_attr: 'content'
+      },
+      data: [
+        {
+          id: 4522,
+          content: 'A check1'
+        },
+        {
+          id: 5645,
+          content: 'An other check2'
+        },
+        {
+          id: 2378,
+          content: 'One more check3'
+        },
+        {
+          id: 3212,
+          content: 'Different check4'
+        },
+        {
+          id: 2211,
+          content: 'This check5'
+        },
+        {
+          id: 9812,
+          content: 'Last check6'
+        }
+      ]
+    });
+    // chain select
+    $('#sample3').dwFilter({
+      title: 'title3',
+      type: 'selectChain',
+      search: 'outer',
+      config: {
+        key_attr: 'id',
+        name_attr: 'name',
+        value_attr: 'content',
+        options_key_attr: 'id',
+        options_value_attr: 'content',
+        options_active_attr: 'selected'
+      },
+      data: [
+        {
+          id: 1555,
+          name: 'The select',
+          content: [
+            {
+              id: 4565,
+              content: 'The option 1',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: 'The option 2',
+              selected: true
+            }
+          ]
+        },
+        {
+          id: 3434,
+          name: 'Super select',
+          content: [
+            {
+              id: 4565,
+              content: 'Super option 1',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: 'Super option 2',
+              selected: false
+            }
+          ]
+        },
+        {
+          id: 2211,
+          name: 'What a select',
+          content: [
+            {
+              id: 4565,
+              content: 'What option 1',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: 'What option 2',
+              selected: true
+            }
+          ]
+        },
+        {
+          id: 4535,
+          name: 'Original select',
+          content: [
+            {
+              id: 4565,
+              content: 'Original option 1',
+              selected: false
+            },
+            {
+              id: 1212,
+              content: 'Original option 2',
+              selected: true
+            }
+          ]
+        }
+      ]
+    });
+    // chain select
+    $('#sample4').dwFilter({
+      title: 'title4',
+      type: 'multiselect',
+      height: 'auto',
+      // search: 'inner',
+      config: {
+        key_value_placeholder: 'placeholder',
+        key_data_attr: 'data'
+      },
+      data: [
+        {
+          placeholder: "Please select",
+          data: [
+            {
+              id: 1,
+              primary: 'Cat',
+              secundary: 'Gray',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 2,
+              primary: 'Dog',
+              secundary: 'White',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 3,
+              primary: 'Cheetah',
+              secundary: 'yellow',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 4,
+              primary: 'Fox',
+              secundary: 'Brown',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 5,
+              primary: 'Culpeo',
+              secundary: 'Light Brown',
+              selected: true,
+              group: ['canine']
+            },
+            {
+              id: 6,
+              primary: 'Jaguar',
+              secundary: 'Yellow',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 7,
+              primary: 'Lion',
+              secundary: 'orange',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 8,
+              primary: 'African Wild Dog',
+              secundary: 'marbled',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 9,
+              primary: 'Yacare Caiman',
+              secundary: 'green',
+              selected: false,
+              group: ['reptile']
+            },
+            {
+              id: 10,
+              primary: 'Leopard Gecko',
+              secundary: 'light brown',
+              selected: false,
+              group: ['reptile']
+            }
+          ]
+        }
+      ]
+    });
+
+    // listeners
+    var smpl1 = $('#sample1');
+    var smpl2 = $('#sample2');
+    var smpl3 = $('#sample3');
+    var smpl4 = $('#sample4');
+    smpl1.on({
+      changeFilter: function(event){
+        var result = smpl1.data('result');
+        console.log("sample1 data: ", result);
+      }
+    });
+    smpl2.on({
+      changeFilter: function(event){
+        var result = smpl2.data('result');
+        console.log("sample2 data: ", result);
+      }
+    });
+    smpl3.on({
+      changeFilter: function(event){
+        var result = smpl3.data('result');
+        console.log("sample3 data: ", result);
+      }
+    });
+    smpl4.on({
+      changeFilter: function(event){
+        var result = smpl4.data('result');
+        console.log("sample4 data: ", result);
+      }
+    });
+  </script>
+</body>
+</html>
