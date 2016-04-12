@@ -26,7 +26,7 @@
   "dependencies": {
     "jquery": "~2.2.0",
     "underscore": "^1.8.3",
-    "dw-typeahead": "^1.6.1",
+    "dw-typeahead": "^1.6.3",
     "dw-list": "^2.1.0"
   }
 }
