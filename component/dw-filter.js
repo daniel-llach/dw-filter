@@ -86,7 +86,6 @@
 
       },
       setOptionTemplate: function($el, options){
-        debugger;
         methods.overflow($el, options);
         switch(options.type) {
           case 'multiselect':
@@ -299,10 +298,7 @@
         $el.trigger('changeFilter');
       },
       overflow: function($el, options){
-        console.log("options.overflow: ", options.overflow);
-        console.log("$el.find('.dw-options'): ", $el.find('.dw-options'));
         if(options.overflow == false){
-          console.log("ok");
           $el.find('.dw-options').css({
             'overflow-y': 'visible'
           })
