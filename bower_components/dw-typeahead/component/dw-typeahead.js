@@ -177,6 +177,12 @@
                   }
                 }else{
                   if(position == 0){
+                    if(items.length == 0){
+                      $selector.append(contentHtml);
+                    }else{
+                      $el.find('.' + group + '.group-content .option:first-child').before(contentHtml);
+                    }
+                  }else if(position == items.length){
                     $selector.append(contentHtml);
                   }else{
                     position = position+1;
@@ -451,6 +457,7 @@
         primaries = _.union(primaries, [primary]);
         primaries = _.uniq(primaries);
         primaries = primaries.sort();
+        console.log("primaries: ", primaries);
         return _.sortedIndex(primaries, primary);
 
       }
