@@ -30,14 +30,14 @@
     "jquery-ui": "^1.11.4",
     "Sortable": "^1.4.2"
   },
-  "version": "2.3.0",
-  "_release": "2.3.0",
+  "version": "2.3.7",
+  "_release": "2.3.7",
   "_resolution": {
     "type": "version",
-    "tag": "v2.3.0",
-    "commit": "d4e63666fd1a7336d4382d3370b26dcc69434b6c"
+    "tag": "v2.3.7",
+    "commit": "f0fca31a032ba9cce4621d1da8a22ebd6b040b17"
   },
-  "_source": "git://github.com/daniel-llach/dw-list.git",
+  "_source": "https://github.com/daniel-llach/dw-list.git",
   "_target": "^2.1.0",
   "_originalSource": "dw-list"
 }

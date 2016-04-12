@@ -1,25 +1,37 @@
-var scripts = document.getElementsByTagName("script");
-var urlBase = scripts[scripts.length-1].src;
-urlBase = urlBase.replace('dw-typeahead.js', '');
 
 // dwFilter
 (function( $ ){
   "use strict"
 
+  var scripts = document.getElementsByTagName("script");
+  var urlBase = scripts[scripts.length-1].src;
+  urlBase = urlBase.replace('dw-typeahead.js', '');
+
+  let shadowDown;
+
+  let selectedIds = [];
+  let groups = [];
+
   // Public methods
   let api = {
     init : function(options) {
       const $el = $(this);
-      // deploy component structure
-      let deployment = new Promise(function(resolve, reject){
-        methods.deployComponent($el, options);
-        resolve()
-      })
-      deployment.then(function(){
-        methods.getTemplate($el, options);
-      })
+      if(!options.delete){
+        // deploy component structure
+        let deployment = new Promise(function(resolve, reject){
+          methods.deployComponent($el, options);
+          resolve()
+        })
+        deployment.then(function(){
+          methods.getTemplate($el, options);
+        })
+      }else{
+        methods.delete($el, options);
+      }
     },
     destroy: function(){
+      selectedIds = [];
+
       const $el = $(this);
       $el.empty();
       $el.removeClass('dw-typeahead');
@@ -56,6 +68,8 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       $options.addClass('hide');
       $clear.addClass('hide');
       $search.val('');  // clean text search
+      // Clear result data
+      $el.data('result', null);
     }
   }
 
@@ -92,49 +106,93 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
 
     },
     optionTemplate: function($el, options){
-
       let optionsData = (options.add) ? options['add'] : options.data;
-
-      let data = optionsData[0];
+      let contains = _.contains(selectedIds, optionsData[0]['id'])
+      let head = optionsData[0];
 
       // If has groups, paint groups containers
-      if( data.hasOwnProperty('group') ){
+      if ( head.hasOwnProperty('group') ) {
         // define groups
-        let groups =  _.chain(optionsData).flatten().pluck('group').flatten().unique().value().sort();
+        let tempGroups =  _.chain(optionsData).flatten().pluck('group').flatten().unique().value().sort();
+        groups = _.union(groups,tempGroups, optionsData[0].group[0]);
+        groups = _.uniq(groups);
 
         // paint groups containers
         if(!options.add){
           _.each(groups, function(group){
             $el.find('content > .options').append('<div class="group" id="' + group + '"><div class="title"><span class="name">' + group + '</span><span class="open"></span></div></div><div class="group-content ' + group + '"></div>')
           })
+        } else {
+          if (!contains) {
+
+            let optionsSize = $el.find('content .group-content.' + optionsData[0].group[0] + ' .option').size();
+            groups.push(optionsData[0].group[0]);
+            groups = _.uniq(groups);
+            groups = groups.sort();
+            if(optionsSize == 0){
+              let groupIndex = _.sortedIndex(groups, optionsData[0].group[0]);
+              let appendPoint = groups[groupIndex];
+
+              if(groupIndex == groups.length - 1){
+                $el.find('content > .options').append('<div class="group" id="' + optionsData[0].group[0] + '"><div class="title"><span class="name">' + optionsData[0].group[0] + '</span><span class="open"></span></div></div><div class="group-content ' + optionsData[0].group[0] + '"></div>')
+              }else{
+                $el.find('content > .options .group#' + groups[groupIndex+1]).before('<div class="group" id="' + optionsData[0].group[0] + '"><div class="title"><span class="name">' + optionsData[0].group[0] + '</span><span class="open"></span></div></div><div class="group-content ' + optionsData[0].group[0] + '"></div>')
+              }
+            }
+          } else {
+            console.info("ya existe id");
+          }
         }
 
-        // put options into its group
-        $.get(urlBase + "templates/options.html", function( result ) {
+        // check if exist id
+        if (!contains) {
+          // put options into its group
+          $.get(urlBase + "templates/options.html", function( result ) {
             let template = _.template(result);
-
-
-
-            let data = _.sortBy(optionsData, 'primary');
+            let sorted_options = _.sortBy(optionsData, 'primary');
 
             // options each
-            data.forEach(data => {
+            sorted_options.forEach(option => {
               let contentHtml = template({
-                id: data['id'],
-                primary: data['primary'],
-                secundary: data['secundary'],
-                selected: data['selected']
+                id: option['id'],
+                primary: option['primary'],
+                secundary: option['secundary'],
+                selected: option['selected']
               });
               // paint in specific group content
-              let group = data['group'];
-              $el.find('.' + group + '.group-content').append(contentHtml);
+              let group = option['group'];
+              let primary = option['primary'];
+
+              var $selector = $el.find('.' + group + '.group-content');
+              if(!options.add){
+                $selector.append(contentHtml);
+              }else{
+                let position = parseInt( methods.sortInGroup($el, optionsData[0].group[0], optionsData[0].primary) );
+                let items = $el.find('.group-content.' + group + ' .primary');
+                if(items.length == 1){
+                  if(position == 0){
+                    $el.find('.' + group + '.group-content .option:first-child').before(contentHtml);
+                  }else{
+                    $selector.append(contentHtml);
+                  }
+                }else{
+                  if(position == 0){
+                    $selector.append(contentHtml);
+                  }else{
+                    position = position+1;
+                    $el.find('.' + group + '.group-content .option:nth-child(' + position + ')').before(contentHtml);
+                  }
+                }
+
+              }
             });
 
             methods.setPosition($el);
             events.start($el, options);
           });
+        }
+      } else{
 
-      }else{
         // no groups
         // put options into its group
         $.get(urlBase + "templates/options.html", function( result ) {
@@ -153,11 +211,12 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
               $el.find('content > .options').append(contentHtml);
             });
 
+
+
             methods.setPosition($el);
             events.start($el, options);
           });
       }
-
     },
     setPosition: function($el){
       let windowHeight = $(window).height();
@@ -175,15 +234,15 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       if(windowHeight - ( contentTop + contentHeight ) < 0 ){
         $el.find('content').css({
           top: contentTop - contentHeight + - headerHeight + 'px'
-        })
-        .addClass('shadowUp')
-        .removeClass('shadowDown')
+        });
+        shadowDown = false;
+        methods.putShadow($el);
       }else{
         $el.find('content').css({
           top: contentTop + 'px'
-        })
-        .addClass('shadowDown')
-        .removeClass('shadowUp')
+        });
+        shadowDown = true;
+        methods.putShadow($el);
       }
       // horizontal
       $el.find('content').css({
@@ -191,6 +250,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         left: contentLeft + 'px'
 
       })
+      // shadow
     },
     previousParentsScrollTop: function($el){
       (function($) {
@@ -333,7 +393,8 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
         let $opt = $(options[i]);
         ids.push($opt.data('id'));
       }
-      $el.data('result', ids);
+
+      $el.data('result', _.uniq(ids));
       methods.passResult($el);
       return ids;
     },
@@ -347,6 +408,53 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       $search.val(primaryContent);
       $search.focus();
 
+    },
+    putShadow: function($el){
+      (shadowDown) ? $el.find('.options').addClass('shadowDown').removeClass('shadowUp') : $el.find('.options').addClass('shadowUp').removeClass('shadowDown');
+    },
+
+    delete: function($el, options){
+      let itemId = options.delete[0]['id'];
+      // delete items
+      methods.removeItem($el, itemId);
+      //update selectedItems
+      let itemsId = [];
+      itemsId.push(itemId);
+      selectedIds = _.difference(selectedIds, itemsId)
+    },
+
+    removeItem: function($el, itemId){
+      let groupItem = $el.find('.option[data-id="' + itemId +  '"]').parent().attr('class').replace('group-content ','');
+      $el.find('.option[data-id="' + itemId +  '"]').remove();
+      let $groupItem = $('#' + groupItem);
+      let groupItemLength = $groupItem.next().children().length;
+      if (groupItemLength == 0) {
+        // borrar titulo del grupo
+        $el.find('.group#' + groupItem).remove();
+        // borrar contenedor de opciones
+        $el.find('.group-content.' + groupItem).remove();
+        // remove from groups array
+        groups = _.difference(groups, [groupItem]);
+      }
+    },
+
+    sortInGroup: function($el, group, primary){
+      let items = $el.find('.group-content.' + group + ' .primary');
+      if(items.length == 0){
+        return 0;
+      }else{
+        let primaries = [];
+        items.each(function(i, item){
+          primaries.push( $(item).text() );
+        })
+
+        primaries = _.union(primaries, [primary]);
+        primaries = _.uniq(primaries);
+        primaries = primaries.sort();
+        return _.sortedIndex(primaries, primary);
+
+      }
+
     }
   }
 
@@ -355,6 +463,13 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
   var events = {
 
     start: function($el, options){
+      let $options = $el.find('.option').toArray();
+      $options.forEach(opt => {
+        let $opt = $(opt);
+        selectedIds.push($opt.data('id'));
+        selectedIds = _.uniq(selectedIds);  // prevent duplicate ids
+      })
+
       events.onSearch($el, options);
       events.clearSearch($el, options);
       events.clickOption($el, options);
@@ -396,6 +511,7 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
 
           // show/hide clear icon
           ($search.val().length > 0) ? $clear.removeClass('hide') : $clear.addClass('hide');
+
         },
         focusout: function(event){
           api.restart($el, false);
@@ -455,7 +571,10 @@ urlBase = urlBase.replace('dw-typeahead.js', '');
       $(document).on( 'scroll', $parentScroll[0].tagname, function(){
         methods.setPosition($el)
       });
-    },
+    }
+
+
+
 
   };
 
