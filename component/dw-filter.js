@@ -86,6 +86,8 @@
 
       },
       setOptionTemplate: function($el, options){
+        debugger;
+        methods.overflow($el, options);
         switch(options.type) {
           case 'multiselect':
             methods.multiselectTemplate($el, options);
@@ -295,6 +297,16 @@
       },
       passResult: function($el){
         $el.trigger('changeFilter');
+      },
+      overflow: function($el, options){
+        console.log("options.overflow: ", options.overflow);
+        console.log("$el.find('.dw-options'): ", $el.find('.dw-options'));
+        if(options.overflow == false){
+          console.log("ok");
+          $el.find('.dw-options').css({
+            'overflow-y': 'visible'
+          })
+        }
       }
     };
 
@@ -385,7 +397,6 @@
             event.preventDefault();
             event.stopPropagation();
             let chooseVal = $choose.data('result');
-            console.log("chooseVal: ", chooseVal);
 
             if (chooseVal) {
               // get item data from localstore
@@ -426,12 +437,8 @@
           delete: function(event, item){
             event.preventDefault();
             event.stopPropagation();
-            console.log("item remove: ", item);
             // get data item by id from localstore
             let itemData = _.where(localstore, {id: item});
-
-            console.log("itemData: ", itemData);
-
             $('#choose').dwTypeahead({
               add:[
                 {
