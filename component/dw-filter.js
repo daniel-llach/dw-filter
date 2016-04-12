@@ -24,6 +24,8 @@
       },
       destroy: function(){
         const $el = $(this);
+        $el.find('.selectedItems').dwList('destroy');
+        $el.find('#choose').dwTypeahead('destroy');
         $el.empty();
         $el.removeClass('dw-filter');
       },
@@ -84,6 +86,7 @@
 
       },
       setOptionTemplate: function($el, options){
+        methods.overflow($el, options);
         switch(options.type) {
           case 'multiselect':
             methods.multiselectTemplate($el, options);
@@ -162,6 +165,7 @@
 
           // localstore
           localstore = options.data[0][data];
+          localstore = _.uniq(localstore);
 
           // init dw-typeahead
           methods.initDwTypeahead(options.data[0][placeholder]);
@@ -292,6 +296,13 @@
       },
       passResult: function($el){
         $el.trigger('changeFilter');
+      },
+      overflow: function($el, options){
+        if(options.overflow == false){
+          $el.find('.dw-options').css({
+            'overflow-y': 'visible'
+          })
+        }
       }
     };
 
@@ -379,30 +390,35 @@
 
         $add.on({
           click: function(){
-            let chooseVal = $choose.data('result')
-            // clean and restart dw-typeahead
-            $choose.dwTypeahead('empty');
-            $choose.dwTypeahead('restart');
-            // get item data from localstore
-            let itemData = _.where(localstore, {id: chooseVal[0]});
-            // add item to dw-list
-            $selected.dwList({
-              add:[
-                {
-                  id: itemData[0].id,
-                  primary: itemData[0].primary
-                }
-              ]
-            })
+            event.preventDefault();
+            event.stopPropagation();
+            let chooseVal = $choose.data('result');
 
-            console.log("remove: ", $selected.find('.remove'));
+            if (chooseVal) {
+              // get item data from localstore
+              let itemData = _.where(localstore, {id: chooseVal[0]});
+              // add item to dw-list
+              $selected.dwList({
+                add:[
+                  {
+                    id: itemData[0].id,
+                    primary: itemData[0].primary
+                  }
+                ]
+              })
 
-            //remove item from dw-typeahead
-            $el.find('.dw-typeahead .option[data-id="' + itemData[0].id + '"]').remove()
-
-
-
-
+              // indicate to dw-typeahead that delete the item
+              $choose.dwTypeahead({
+                delete:[
+                  {
+                    id: chooseVal[0]
+                  }
+                ]
+              })
+              // clean and restart dw-typeahead
+              $choose.dwTypeahead('empty');
+              // $choose.dwTypeahead('restart');
+            }
           }
         })
 
@@ -413,10 +429,10 @@
             event.preventDefault();
             event.stopPropagation();
             api.val($el);
-
           },
           delete: function(event, item){
-            console.log("item remove: ", item);
+            event.preventDefault();
+            event.stopPropagation();
             // get data item by id from localstore
             let itemData = _.where(localstore, {id: item});
             $('#choose').dwTypeahead({
@@ -432,8 +448,6 @@
             })
           }
         });
-
-
       }
     };
 
