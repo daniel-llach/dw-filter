@@ -36,6 +36,6 @@
     "commit": "62dd4ee2c201586f8c677463383a04f4000a541c"
   },
   "_source": "https://github.com/daniel-llach/dw-typeahead.git",
-  "_target": "^1.4.6",
+  "_target": "^1.6.1",
   "_originalSource": "dw-typeahead"
 }
