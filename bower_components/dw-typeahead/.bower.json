@@ -28,14 +28,15 @@
     "jquery": "^2.2.1",
     "underscore": "^1.8.3"
   },
-  "version": "1.6.1",
-  "_release": "1.6.1",
+  "version": "1.6.2",
+  "_release": "1.6.2",
   "_resolution": {
     "type": "version",
-    "tag": "v1.6.1",
-    "commit": "62dd4ee2c201586f8c677463383a04f4000a541c"
+    "tag": "v1.6.2",
+    "commit": "5abcb2af8f35282e566ef58b249ea4b802735343"
   },
   "_source": "https://github.com/daniel-llach/dw-typeahead.git",
-  "_target": "^1.6.1",
-  "_originalSource": "dw-typeahead"
+  "_target": "^1.6.2",
+  "_originalSource": "dw-typeahead",
+  "_direct": true
 }
