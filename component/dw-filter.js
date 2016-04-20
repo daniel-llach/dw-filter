@@ -443,7 +443,7 @@
             dataObj.secundary = itemData[0].secundary;
             dataObj.selected = itemData[0].selected;
             // if has group add it
-            (itemData.hasOwnProperty('group')) ? dataObj.group = itemData[0].selected : '';
+            (itemData[0].hasOwnProperty('group')) ? dataObj.group = itemData[0].group : '';
             // add in typeahead
             $('#choose').dwTypeahead({
               add:[dataObj]
