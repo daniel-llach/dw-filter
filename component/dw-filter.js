@@ -178,6 +178,7 @@
         $('#choose').dwTypeahead({
           placeholder: placeholder,
           data: localstore
+          // data: []
         })
       },
       showSearch: function($el, options){
@@ -389,7 +390,7 @@
         })
 
         $add.on({
-          click: function(){
+          click: function(event){
             event.preventDefault();
             event.stopPropagation();
             let chooseVal = $choose.data('result');
@@ -435,16 +436,17 @@
             event.stopPropagation();
             // get data item by id from localstore
             let itemData = _.where(localstore, {id: item});
+            // preparing obj to add
+            let dataObj = {};
+            dataObj.id = itemData[0].id;
+            dataObj.primary = itemData[0].primary;
+            dataObj.secundary = itemData[0].secundary;
+            dataObj.selected = itemData[0].selected;
+            // if has group add it
+            (itemData.hasOwnProperty('group')) ? dataObj.group = itemData[0].selected : '';
+            // add in typeahead
             $('#choose').dwTypeahead({
-              add:[
-                {
-                  id: itemData[0].id,
-                  primary: itemData[0].primary,
-                  secundary: itemData[0].secundary,
-                  selected: itemData[0].selected,
-                  group: itemData[0].group
-                }
-              ]
+              add:[dataObj]
             })
           }
         });
