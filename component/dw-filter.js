@@ -13,14 +13,18 @@
     let api = {
       init : function(options) {
         const $el = $(this);
-        // deploy component structure
-        let deployment = new Promise(function(resolve, reject){
-          methods.deployComponent($el, options);
-          resolve();
-        });
-        deployment.then(function(){
-          methods.getTemplate($el, options);
-        });
+        if(!options.select){
+          // deploy component structure
+          let deployment = new Promise(function(resolve, reject){
+            methods.deployComponent($el, options);
+            resolve();
+          });
+          deployment.then(function(){
+            methods.getTemplate($el, options);
+          });
+        }else{
+          api.select($el, options)
+        }
       },
       destroy: function(){
         const $el = $(this);
@@ -40,6 +44,23 @@
             return methods.valSelectChain($el);
           case 'multiselect':
             return methods.valMultiselect($el);
+          case undefined:
+            return 'No type defined in this $el data';
+          default:
+            return 'This type not exist';
+        }
+      },
+      select: function($el, options){
+        (typeof $el === 'undefined' || $el === null ) ? $el = $(this) : null;
+        const type = $el.data('type');
+        // builds each modified object
+        switch(type) {
+          case 'checkbox':
+            return methods.selectCheckbox($el, options);
+          case 'selectChain':
+            return methods.selectSelectChain($el, options);
+          case 'multiselect':
+            return methods.selectMultiselect($el, options);
           case undefined:
             return 'No type defined in this $el data';
           default:
@@ -304,6 +325,116 @@
             'overflow-y': 'visible'
           })
         }
+      },
+      selectMultiselect: function($el, options){
+        methods.passValMultiselect($el, options.select);
+      },
+      passValMultiselect: function($el, ids){
+        let $choose = $el.find('#choose');
+        let $selected = $el.find('.selectedItems');
+
+
+      let componentData = api.val($el);
+      let status = componentData.data;
+
+        let addObjects = [];
+        let removeObjects = [];
+        let addIds = [];
+        let removeIds = [];
+
+        // subsets
+        let intersection = _.intersection(status, ids);
+        console.log("intersection: ", intersection);
+
+        if(ids.length == 0){
+          // if no ids clean dw-list and add
+          // the selected items back to the dw-typeahead
+          for(let i=0;i<status.length;i++){
+            // get data item by id from localstore
+            let itemData = _.where(localstore, {id: status[i]});
+            // preparing obj to add
+            let dataObj = {};
+            dataObj.id = itemData[0].id;
+            dataObj.primary = itemData[0].primary;
+            dataObj.secundary = itemData[0].secundary;
+            dataObj.selected = itemData[0].selected;
+            // if has group add it
+            (itemData[0].hasOwnProperty('group')) ? dataObj.group = itemData[0].group : '';
+            // push changed items
+            addObjects.push(dataObj);
+            removeIds.push(dataObj.id);
+          }
+        }else{
+          // add if it's not intersection
+          // and not in the localstore
+          for(let i=0;i<ids.length;i++){
+            if( !_.contains(intersection, ids[i]) ){
+
+              if( !_.contains(status, ids[i]) ){
+                // get item data from localstore
+                let itemData2 = _.where(localstore, {id: ids[i]});
+                // push changed item
+                addIds.push({
+                  id: itemData2[0].id,
+                  primary: itemData2[0].primary
+                });
+                removeObjects.push({
+                  id: itemData2[0].id
+                })
+
+              }
+            }
+          }
+          // remove if it's not intersection
+          // and not in the new ids array
+          for(let i=0;i<status.length;i++){
+            if( !_.contains(intersection, ids[i]) ){
+              if( !_.contains(ids, status[i]) ){
+                console.log("no lo contiene el nuevo array, hay que quitarlo");
+
+                // get data item by id from localstore
+                let itemData = _.where(localstore, {id: status[i]});
+                // preparing obj to add
+                let dataObj = {};
+                dataObj.id = itemData[0].id;
+                dataObj.primary = itemData[0].primary;
+                dataObj.secundary = itemData[0].secundary;
+                dataObj.selected = itemData[0].selected;
+                // if has group add it
+                (itemData[0].hasOwnProperty('group')) ? dataObj.group = itemData[0].group : '';
+                // push changed items
+                addObjects.push(dataObj);
+                removeIds.push(dataObj.id);
+              }
+            }
+          }
+        }
+
+
+        // luego de tener todo hacer operacion final de añadir y luego borrar
+        let adds = new Promise(function(resolve, reject){
+          (addObjects.length > 0) ? methods.addTypeaheadItems($choose, addObjects) : '';
+          (addIds.length > 0) ? methods.addListItems($selected, addIds) : '';
+          resolve();
+        })
+        adds.then(function(){
+          (removeObjects.length > 0) ? methods.removeTypeaheadItems($choose, removeObjects) : '';
+          (removeIds.length > 0) ? methods.removeListItems($selected, removeIds) : '';
+        })
+
+      },
+      addTypeaheadItems: function($choose, items){
+        $choose.dwTypeahead({ add: items })
+      },
+      removeTypeaheadItems: function($choose, items){
+        $choose.dwTypeahead({ delete: items });
+        $choose.dwTypeahead('empty');
+      },
+      addListItems: function($selected, ids){
+        $selected.dwList({ add: ids })
+      },
+      removeListItems: function($selected, ids){
+        $selected.dwList({ delete: ids })
       }
     };
 
@@ -393,33 +524,9 @@
           click: function(event){
             event.preventDefault();
             event.stopPropagation();
-            let chooseVal = $choose.data('result');
+            let ids = $choose.data('result');
 
-            if (chooseVal) {
-              // get item data from localstore
-              let itemData = _.where(localstore, {id: chooseVal[0]});
-              // add item to dw-list
-              $selected.dwList({
-                add:[
-                  {
-                    id: itemData[0].id,
-                    primary: itemData[0].primary
-                  }
-                ]
-              })
-
-              // indicate to dw-typeahead that delete the item
-              $choose.dwTypeahead({
-                delete:[
-                  {
-                    id: chooseVal[0]
-                  }
-                ]
-              })
-              // clean and restart dw-typeahead
-              $choose.dwTypeahead('empty');
-              // $choose.dwTypeahead('restart');
-            }
+            methods.passValMultiselect($el, ids);
           }
         })
 
@@ -435,6 +542,8 @@
             event.preventDefault();
             event.stopPropagation();
             // get data item by id from localstore
+            // methods.passValMultiselect($el, [item]);
+
             let itemData = _.where(localstore, {id: item});
             // preparing obj to add
             let dataObj = {};
@@ -444,10 +553,11 @@
             dataObj.selected = itemData[0].selected;
             // if has group add it
             (itemData[0].hasOwnProperty('group')) ? dataObj.group = itemData[0].group : '';
-            // add in typeahead
-            $('#choose').dwTypeahead({
-              add:[dataObj]
-            })
+
+            let $choose = $el.find('#choose');
+            methods.addTypeaheadItems($choose, [dataObj]);
+
+
           }
         });
       }
