@@ -333,9 +333,8 @@
         let $choose = $el.find('#choose');
         let $selected = $el.find('.selectedItems');
 
-
-      let componentData = api.val($el);
-      let status = componentData.data;
+        let componentData = api.val($el);
+        let status = componentData.data;
 
         let addObjects = [];
         let removeObjects = [];
@@ -524,9 +523,26 @@
           click: function(event){
             event.preventDefault();
             event.stopPropagation();
+            let $choose = $el.find('#choose');
+            let $selected = $el.find('.selectedItems');
             let ids = $choose.data('result');
 
-            methods.passValMultiselect($el, ids);
+            console.log("ids: ", ids);
+
+            // get item data from localstore
+            let itemData3 = _.where(localstore, {id: ids[0]});
+            console.log("itemData3: ", itemData3);
+            // push changed item
+            methods.addListItems($selected, [{
+              id: itemData3[0].id,
+              primary: itemData3[0].primary
+            }]);
+            methods.removeTypeaheadItems($choose, [{
+              id: itemData3[0].id
+            }])
+
+
+
           }
         })
 
