@@ -434,6 +434,12 @@
       },
       removeListItems: function($selected, ids){
         $selected.dwList({ delete: ids })
+      },
+      guidGenerator: function() {
+        var S4 = function() {
+           return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
       }
     };
 
@@ -512,7 +518,7 @@
         // init dw-list
         let $selected = $el.find('.selectedItems');
         $selected.dwList({
-          name: 'selectedItems',
+          name: methods.guidGenerator(),  // create an random id
           type: 'order', // priority, order, change
           style: 'naked',
           sortable: true,
@@ -527,11 +533,8 @@
             let $selected = $el.find('.selectedItems');
             let ids = $choose.data('result');
 
-            console.log("ids: ", ids);
-
             // get item data from localstore
             let itemData3 = _.where(localstore, {id: ids[0]});
-            console.log("itemData3: ", itemData3);
             // push changed item
             methods.addListItems($selected, [{
               id: itemData3[0].id,
