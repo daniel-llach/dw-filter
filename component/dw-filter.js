@@ -189,14 +189,14 @@
           localstore = _.uniq(localstore);
 
           // init dw-typeahead
-          methods.initDwTypeahead(options.data[0][placeholder]);
+          methods.initDwTypeahead($el, options.data[0][placeholder]);
 
           // events for multiselect
           events.multiselect($el, options);
         });
       },
-      initDwTypeahead: function(placeholder){
-        $('#choose').dwTypeahead({
+      initDwTypeahead: function($el, placeholder){
+        $el.find('#choose').dwTypeahead({
           placeholder: placeholder,
           data: localstore
           // data: []
@@ -543,8 +543,6 @@
             methods.removeTypeaheadItems($choose, [{
               id: itemData3[0].id
             }])
-
-
 
           }
         })
