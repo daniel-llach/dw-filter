@@ -28,6 +28,7 @@
     <div id="sample1" class="demoDiv"></div>
     <div id="sample4" class="demoDiv"></div>
     <div id="sample2" class="demoDiv"></div>
+    <div id="sample5" class="demoDiv"></div>
     <div id="sample3" class="demoDiv"></div>
   </div>
 
@@ -307,12 +308,102 @@
         }
       ]
     });
+    // chain select
+    $('#sample5').dwFilter({
+      title: 'title5',
+      type: 'multiselect',
+      height: 'auto',
+      overflow: false,
+      // search: 'inner',
+      config: {
+        key_value_placeholder: 'placeholder',
+        key_data_attr: 'data'
+      },
+      data: [
+        {
+          placeholder: "Please select",
+          data: [
+            {
+              id: 1,
+              primary: 'Cat',
+              secundary: 'Gray',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 2,
+              primary: 'Dog',
+              secundary: 'White',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 3,
+              primary: 'Cheetah',
+              secundary: 'yellow',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 4,
+              primary: 'Fox',
+              secundary: 'Brown',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 5,
+              primary: 'Culpeo',
+              secundary: 'Light Brown',
+              selected: true,
+              group: ['canine']
+            },
+            {
+              id: 6,
+              primary: 'Jaguar',
+              secundary: 'Yellow',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 7,
+              primary: 'Lion',
+              secundary: 'orange',
+              selected: false,
+              group: ['feline']
+            },
+            {
+              id: 8,
+              primary: 'African Wild Dog',
+              secundary: 'marbled',
+              selected: false,
+              group: ['canine']
+            },
+            {
+              id: 9,
+              primary: 'Yacare Caiman',
+              secundary: 'green',
+              selected: false,
+              group: ['reptile']
+            },
+            {
+              id: 10,
+              primary: 'Leopard Gecko',
+              secundary: 'light brown',
+              selected: false,
+              group: ['reptile']
+            }
+          ]
+        }
+      ]
+    });
 
     // listeners
     var smpl1 = $('#sample1');
     var smpl2 = $('#sample2');
     var smpl3 = $('#sample3');
     var smpl4 = $('#sample4');
+    var smpl5 = $('#sample5');
     smpl1.on({
       changeFilter: function(event){
         var result = smpl1.data('result');
@@ -334,6 +425,12 @@
     smpl4.on({
       changeFilter: function(event){
         var result = smpl4.data('result');
+        console.log("sample4 data: ", result);
+      }
+    });
+    smpl5.on({
+      changeFilter: function(event){
+        var result = smpl5.data('result');
         console.log("sample4 data: ", result);
       }
     });

@@ -196,7 +196,7 @@
         });
       },
       initDwTypeahead: function($el, placeholder){
-        $el.find('#choose').dwTypeahead({
+        $el.find('.choose').dwTypeahead({
           placeholder: placeholder,
           data: localstore
           // data: []
@@ -330,7 +330,7 @@
         methods.passValMultiselect($el, options.select);
       },
       passValMultiselect: function($el, ids){
-        let $choose = $el.find('#choose');
+        let $choose = $el.find('.choose');
         let $selected = $el.find('.selectedItems');
 
         let componentData = api.val($el);
@@ -512,7 +512,7 @@
       },
       multiselect: function($el){
         // getChoose
-        let $choose = $el.find('#choose');
+        let $choose = $el.find('.choose');
         let $add = $el.find('.add');
 
         // init dw-list
@@ -529,7 +529,7 @@
           click: function(event){
             event.preventDefault();
             event.stopPropagation();
-            let $choose = $el.find('#choose');
+            let $choose = $el.find('.choose');
             let $selected = $el.find('.selectedItems');
             let ids = $choose.data('result');
 
@@ -571,7 +571,7 @@
             // if has group add it
             (itemData[0].hasOwnProperty('group')) ? dataObj.group = itemData[0].group : '';
 
-            let $choose = $el.find('#choose');
+            let $choose = $el.find('.choose');
             methods.addTypeaheadItems($choose, [dataObj]);
 
 
