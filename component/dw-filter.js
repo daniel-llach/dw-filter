@@ -29,7 +29,7 @@
       destroy: function(){
         const $el = $(this);
         $el.find('.selectedItems').dwList('destroy');
-        $el.find('#choose').dwTypeahead('destroy');
+        $el.find('.choose').dwTypeahead('destroy');
         $el.empty();
         $el.removeClass('dw-filter');
       },
